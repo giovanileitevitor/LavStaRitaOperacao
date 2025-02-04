@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/loadingBox"
+        layout="@layout/loading_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        tools:visibility="invisible"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideCenter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.50"/>
+
+    <TextView
+        android:id="@+id/txtAppName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/size_24"
+        android:fontFamily="@font/advent_pro"
+        android:text="@string/txt_painel_adicionar"
+        android:textColor="@color/blue_lav"
+        android:textSize="@dimen/font_size_24"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/btnVoltar"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btnVoltar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_20"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/img_description"
+        android:src="@drawable/ic_voltar"
+        app:layout_constraintBottom_toBottomOf="@id/txtAppName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/txtAppName"/>
+
+    <ImageButton
+        android:id="@+id/btnCancelar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/size_32"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/img_description"
+        android:src="@drawable/ic_exit"
+        app:layout_constraintBottom_toBottomOf="@id/txtAppName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/txtAppName" />
+
+    <TextView
+        android:id="@+id/labelClient"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_24"
+        android:layout_marginTop="@dimen/size_20"
+        android:text="@string/label_client_name"
+        android:textColor="@color/blue_lav"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtAppName"
+        tools:text="Nome do Cliente:" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edtGo"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="@dimen/size_20"
+        android:layout_marginTop="@dimen/match_constraint"
+        android:layout_marginEnd="@dimen/size_20"
+        app:boxStrokeColor="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/labelClient">
+
+        <EditText
+            android:id="@+id/edtClientName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:background="@null"
+            android:hint="@string/edt_client"
+            android:inputType="textCapWords"
+            android:lines="1"
+            android:maxLength="50"
+            android:maxLines="1"
+            android:textColor="@color/blue_lav"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/labelPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_24"
+        android:layout_marginTop="@dimen/size_8"
+        android:text="@string/label_client_fone"
+        android:textColor="@color/blue_lav"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edtGo"
+        tools:text="Telefone de Contato:" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edtTelefone"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="@dimen/size_20"
+        android:layout_marginTop="@dimen/match_constraint"
+        android:layout_marginEnd="@dimen/size_20"
+        app:boxStrokeColor="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/labelPhone">
+
+        <EditText
+            android:id="@+id/edtClientFone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:background="@null"
+            android:hint="@string/edt_client"
+            android:inputType="phone"
+            android:lines="1"
+            android:maxLength="50"
+            android:maxLines="1"
+            android:textColor="@color/blue_lav"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/labelItems"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_24"
+        android:layout_marginTop="@dimen/size_12"
+        android:text="@string/label_client_itens"
+        android:textColor="@color/blue_lav"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edtTelefone"
+        tools:text="Items:" />
+
+    <TextView
+        android:id="@+id/btnIncluirItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_12"
+        android:layout_marginEnd="@dimen/size_24"
+        android:background="?selectableItemBackground"
+        android:clickable="true"
+        android:enabled="true"
+        android:text="@string/label_incluir"
+        android:textColor="@color/blue_lav"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edtTelefone"
+        tools:text="INCLUIR" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvItems"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/match_constraint"
+        android:layout_marginStart="@dimen/size_14"
+        android:layout_marginEnd="@dimen/size_14"
+        android:background="@drawable/qtd_corner"
+        android:padding="@dimen/size_6"
+        android:layout_marginBottom="@dimen/size_10"
+        app:layout_constraintBottom_toTopOf="@+id/btnCreateService"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/labelItems"
+        tools:itemCount="3"
+        tools:listitem="@layout/item_item"/>
+
+    <Button
+        android:id="@+id/btnCreateService"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/size_20"
+        android:text="Registrar Serviço"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

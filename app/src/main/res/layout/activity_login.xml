@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.login.LoginActivity">
+
+    <include
+        android:id="@+id/loadingBox"
+        layout="@layout/loading_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        tools:visibility="invisible"/>
+
+    <ImageView
+        android:id="@+id/imgLogin"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:contentDescription="@string/img_description"
+        android:scaleType="centerCrop"
+        android:src="@drawable/img_lav"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/txtAppName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:gravity="center"
+        android:paddingTop="20dp"
+        android:text="@string/app_name_label"
+        android:textColor="@color/blue_lav"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgLogin"
+        tools:text="Lavanderia Sta Rita"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edtGo"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        app:boxStrokeColor="@color/blue_lav"
+        app:endIconContentDescription="@string/img_description"
+        app:endIconDrawable="@drawable/ic_search"
+        app:endIconMode="custom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtAppName">
+
+        <EditText
+            android:id="@+id/edtCpf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:background="@null"
+            android:hint="@string/edt_cpf"
+            android:inputType="number"
+            android:lines="1"
+            android:maxLines="1"
+            android:textColor="@color/blue_lav"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/txtStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:textColor="@color/blue_lav"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edtGo"
+        tools:text="Status: - " />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideIcons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.85" />
+
+    <ImageView
+        android:id="@+id/btnFacebook"
+        android:layout_width="@dimen/size_28"
+        android:layout_height="@dimen/size_28"
+        android:layout_marginStart="80dp"
+        android:contentDescription="@string/img_description"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_face_vec"
+        app:layout_constraintBottom_toBottomOf="@id/guideIcons"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guideIcons" />
+
+    <ImageView
+        android:id="@+id/btnWhatsapp"
+        android:layout_width="@dimen/size_28"
+        android:layout_height="@dimen/size_28"
+        android:contentDescription="@string/img_description"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_whats_vec"
+        app:layout_constraintBottom_toBottomOf="@id/guideIcons"
+        app:layout_constraintEnd_toStartOf="@id/btnInstagram"
+        app:layout_constraintStart_toEndOf="@id/btnFacebook"
+        app:layout_constraintTop_toTopOf="@id/guideIcons"
+        />
+
+    <ImageView
+        android:id="@+id/btnInstagram"
+        android:layout_width="@dimen/size_28"
+        android:layout_height="@dimen/size_28"
+        android:layout_marginEnd="80dp"
+        android:contentDescription="@string/img_description"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_instagram_vec"
+        app:layout_constraintBottom_toBottomOf="@id/guideIcons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guideIcons"
+        />
+
+    <TextView
+        android:id="@+id/txtRedes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/size_32"
+        android:fontFamily="@font/roboto"
+        android:textColor="@color/blue_lav"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@id/guideIcons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Saiba mais em: " />
+
+    <TextView
+        android:id="@+id/txtVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/blue_lav"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideIcons"
+        tools:text="Version 1.0.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

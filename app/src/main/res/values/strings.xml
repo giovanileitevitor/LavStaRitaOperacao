@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">LavStaRitaOperacao</string>
+    <string name="app_name_label">Lavanderia Sta Rita</string>
+    <string name="on_loading">Aguarde…</string>
+
+    <string name="img_description">image</string>
+    <string name="edt_cpf">CPF:</string>
+    <string name="edt_client"> </string>
+
+    <string name="txt_painel_operation">Painel Principal</string>
+    <string name="txt_painel_adicionar">Cadastrar Serviço</string>
+    <string name="label_services">Serviços: </string>
+    <string name="label_client_name">Nome do cliente: </string>
+    <string name="label_client_fone">Telefone de contato: </string>
+    <string name="label_client_itens">Items: %S </string>
+    <string name="label_incluir"><u>+ INCLUIR</u></string>
+    <string name="label_payment">Pago antecipado ?  </string>
+
+</resources>
