@@ -1,4 +1,4 @@
-package br.lavstaritaoperacao.ui.add_service
+package br.lavstaritaoperacao.ui.operation.add_service
 
 import android.os.Bundle
 import android.widget.Toast
@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.lavstaritaoperacao.R
 import br.lavstaritaoperacao.aux.Mask
+import br.lavstaritaoperacao.aux.getDateAndTime
 import br.lavstaritaoperacao.databinding.ActivityAddServiceBinding
 import br.lavstaritaoperacao.domain.model.Item
 import br.lavstaritaoperacao.domain.model.Service
@@ -21,6 +22,8 @@ class AddServiceActivity: AppCompatActivity() {
     private val viewModel: AddServiceViewModel by viewModel()
     private lateinit var itemsAdapter: ItemsAdapter
     private lateinit var items: List<Item>
+    private lateinit var clientName: String
+    private lateinit var clientPhone: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,16 +53,19 @@ class AddServiceActivity: AppCompatActivity() {
         }
 
         binding.btnCreateService.setOnClickListener {
+            clientName = binding.edtClientName.text.toString()
+            clientPhone = binding.edtClientFone.text.toString()
+
             viewModel.createService(
                 service = Service(
-                    id = 0,
-                    qtd = items.size ?: 0,
-                    client = "",
-                    dataIn = "11 / Jan / 2025"
-            )
+                    clientName = clientName,
+                    clientPhone = clientPhone,
+                    idItems = 0,
+                    qtdItems = items.size ?: 0,
+                    dataIn = getDateAndTime()
+                )
             )
         }
-
     }
 
     private fun setupObservers() {
@@ -67,10 +73,13 @@ class AddServiceActivity: AppCompatActivity() {
             binding.loadingBox.root.isVisible = it == true
         }
         viewModel.onError.observe(this){
-
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         }
         viewModel.onSuccess.observe(this){
-
+            if(it){
+                Toast.makeText(this, "Salvo com sucesso !!", Toast.LENGTH_SHORT).show()
+                super.onBackPressed()
+            }
         }
         viewModel.itemsAdded.observe(this){
             setupRVItems(it)

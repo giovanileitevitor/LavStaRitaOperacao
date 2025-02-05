@@ -67,4 +67,8 @@ dependencies {
     implementation libs.androidx.room.ktx
     kapt(libs.androidx.room.compiler)
 
+    //Bluetooth Printer Driver
+    implementation(libs.escpos.thermalprinter.android)
+    implementation(libs.accompanist.permissions)
+
 }

@@ -10,7 +10,7 @@ import br.lavstaritaoperacao.data.db.entities.ItemEntity
 interface ItemDao{
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertItem(itemEntity: ItemEntity)
+    suspend fun addItem(itemEntity: ItemEntity)
 
     @Query("SELECT * FROM itemTB")
     suspend fun getAllItems(): List<ItemEntity>

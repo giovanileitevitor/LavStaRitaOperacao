@@ -8,10 +8,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import br.lavstaritaoperacao.aux.Mask
+import br.lavstaritaoperacao.aux.PermissionUtils
 import br.lavstaritaoperacao.aux.hideKeyboard
 import br.lavstaritaoperacao.aux.onDebouncedListener
 import br.lavstaritaoperacao.databinding.ActivityLoginBinding
-import br.lavstaritaoperacao.ui.home_operation.OperationActivity
+import br.lavstaritaoperacao.ui.operation.home_operation.OperationActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginActivity : AppCompatActivity() {
@@ -24,9 +25,14 @@ class LoginActivity : AppCompatActivity() {
         enableEdgeToEdge()
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setupPermissions()
         setupView()
         setupListeners()
         setupObservers()
+    }
+
+    private fun setupPermissions(){
+        PermissionUtils.verifyPermissions(this, 1)
     }
 
     private fun setupView(){

@@ -1,4 +1,4 @@
-package br.lavstaritaoperacao.ui.add_service
+package br.lavstaritaoperacao.ui.operation.add_service
 
 import android.view.LayoutInflater
 import android.view.View

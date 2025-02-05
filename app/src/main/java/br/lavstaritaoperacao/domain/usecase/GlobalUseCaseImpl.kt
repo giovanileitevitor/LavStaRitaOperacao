@@ -3,7 +3,6 @@ package br.lavstaritaoperacao.domain.usecase
 import br.lavstaritaoperacao.data.db.LocalRepository
 import br.lavstaritaoperacao.domain.model.Item
 import br.lavstaritaoperacao.domain.model.Service
-import br.lavstaritaoperacao.domain.model.generateServices
 import kotlin.random.Random
 
 class GlobalUseCaseImpl(
@@ -21,15 +20,19 @@ class GlobalUseCaseImpl(
         return localRepository.getServices()
     }
 
-    override suspend fun createService(service: Service): Boolean {
-        return Random.nextBoolean()
+    override suspend fun addService(service: Service) {
+        localRepository.addService(service = service)
     }
 
-    override suspend fun addItem(item: Item) {
-        localRepository.insertItem(item = item)
+    override suspend fun deleteService(service: Service) {
+        localRepository.deleteService(service = service)
     }
 
     override suspend fun getItems(): List<Item> {
         return localRepository.getItems()
+    }
+
+    override suspend fun addItem(item: Item) {
+        localRepository.addItem(item = item)
     }
 }

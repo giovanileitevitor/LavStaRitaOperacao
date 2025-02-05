@@ -6,22 +6,31 @@ import br.lavstaritaoperacao.data.db.entities.ItemEntity
 import br.lavstaritaoperacao.data.db.entities.ServiceEntity
 import br.lavstaritaoperacao.domain.model.Item
 import br.lavstaritaoperacao.domain.model.Service
+import org.koin.core.component.getScopeId
 
 class LocalRepositoryImpl(
     private val itemDao: ItemDao,
     private val serviceDao: ServiceDao
 ): LocalRepository {
 
-    override suspend fun insertItem(item: Item) {
-        itemDao.insertItem(itemEntity = convertItem(item = item))
+    override suspend fun addItem(item: Item) {
+        itemDao.addItem(itemEntity = convertItem(item = item))
     }
 
     override suspend fun getItems(): List<Item> {
         return convertItemEntityIntoItem(items = itemDao.getAllItems())
     }
 
+    override suspend fun addService(service: Service) {
+        serviceDao.addService(serviceEntity = convertService(service = service))
+    }
+
     override suspend fun getServices(): List<Service> {
         return convertServiceEntityIntoService(services = serviceDao.getAllServices())
+    }
+
+    override suspend fun deleteService(service: Service) {
+        serviceDao.deleteService(serviceId = convertService(service = service).id ?: 0)
     }
 
     private fun convertItem(item: Item) : ItemEntity{
@@ -45,15 +54,28 @@ class LocalRepositoryImpl(
         return itemList
     }
 
+    private fun convertService(service: Service): ServiceEntity{
+        return ServiceEntity(
+            id = service.id ?: 0,
+            clientName = service.clientName,
+            clientPhone = service.clientPhone,
+            idItems = service.idItems,
+            qtdItems = service.qtdItems,
+            dataIn = service.dataIn
+        )
+    }
+
     private fun convertServiceEntityIntoService(services: List<ServiceEntity>) : List<Service>{
         val serviceList = mutableListOf<Service>()
         services.forEach {
             serviceList.add(
                 Service(
                     id = it.id ?: 0,
-                    qtd = it.totalItems ?: 0,
-                    client = it.clientName,
-                    dataIn = "10 / Jan / 2025"
+                    clientName = it.clientName,
+                    clientPhone = it.clientPhone,
+                    qtdItems = it.qtdItems,
+                    idItems = it.idItems,
+                    dataIn = it.dataIn
                 )
             )
         }

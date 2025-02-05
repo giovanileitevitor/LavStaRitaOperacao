@@ -9,11 +9,13 @@
 
     <string name="txt_painel_operation">Painel Principal</string>
     <string name="txt_painel_adicionar">Cadastrar Serviço</string>
+    <string name="txt_editar_service">Editar Serviço</string>
     <string name="label_services">Serviços: </string>
     <string name="label_client_name">Nome do cliente: </string>
     <string name="label_client_fone">Telefone de contato: </string>
     <string name="label_client_itens">Items: %S </string>
     <string name="label_incluir"><u>+ INCLUIR</u></string>
     <string name="label_payment">Pago antecipado ?  </string>
+    <string name="btn_registrar_service">Registrar Serviço</string>
 
 </resources>

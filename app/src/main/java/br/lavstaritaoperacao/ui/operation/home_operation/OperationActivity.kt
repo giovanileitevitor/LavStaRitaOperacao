@@ -1,4 +1,4 @@
-package br.lavstaritaoperacao.ui.home_operation
+package br.lavstaritaoperacao.ui.operation.home_operation
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,7 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.lavstaritaoperacao.databinding.ActivityOperationBinding
 import br.lavstaritaoperacao.domain.model.Service
-import br.lavstaritaoperacao.ui.add_service.AddServiceActivity
+import br.lavstaritaoperacao.ui.operation.add_service.AddServiceActivity
+import br.lavstaritaoperacao.ui.operation.edit_service.EditServiceActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class OperationActivity : AppCompatActivity() {
@@ -27,19 +28,28 @@ class OperationActivity : AppCompatActivity() {
         setupObservers()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getServices()
+    }
 
     private fun setupView(){
         viewModel.getServices()
     }
 
     private fun setupListeners(){
-        binding.btnAdd.setOnClickListener {
-            val intent = Intent(this, AddServiceActivity::class.java)
-            startActivity(intent)
-        }
         binding.btnAddsService.setOnClickListener {
             val intent = Intent(this, AddServiceActivity::class.java)
             startActivity(intent)
+        }
+        binding.btnRefresh.setOnClickListener {
+            viewModel.getServices()
+        }
+        binding.btnSearch.setOnClickListener {
+
+        }
+        binding.btnConfig.setOnClickListener {
+
         }
     }
 
@@ -60,11 +70,17 @@ class OperationActivity : AppCompatActivity() {
     private fun setupServicesRV(services: List<Service>){
         binding.rvServices.setHasFixedSize(true)
         binding.rvServices.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-        servicesAdapter = ServicesAdapter(data = services, singleClick)
+        servicesAdapter = ServicesAdapter(data = services, singleClick, onLongClick)
         binding.rvServices.adapter = servicesAdapter
     }
 
     private val singleClick = { service: Service ->
-        Toast.makeText(this, service.client, Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, EditServiceActivity::class.java)
+        intent.putExtra("service", service)
+        startActivity(intent)
+    }
+
+    private val onLongClick = { service: Service ->
+        viewModel.deleteService(service = service)
     }
 }

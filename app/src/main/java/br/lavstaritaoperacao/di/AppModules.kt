@@ -5,9 +5,10 @@ import br.lavstaritaoperacao.data.db.LocalRepository
 import br.lavstaritaoperacao.data.db.LocalRepositoryImpl
 import br.lavstaritaoperacao.domain.usecase.GlobalUseCase
 import br.lavstaritaoperacao.domain.usecase.GlobalUseCaseImpl
-import br.lavstaritaoperacao.ui.add_service.AddServiceViewModel
-import br.lavstaritaoperacao.ui.home_operation.OperationViewModel
+import br.lavstaritaoperacao.ui.operation.add_service.AddServiceViewModel
+import br.lavstaritaoperacao.ui.operation.home_operation.OperationViewModel
 import br.lavstaritaoperacao.ui.login.LoginViewModel
+import br.lavstaritaoperacao.ui.operation.edit_service.EditServiceViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -33,6 +34,10 @@ object AppModules {
             ) }
 
         viewModel { AddServiceViewModel(
+                globalUseCase = get()
+            ) }
+
+        viewModel { EditServiceViewModel(
                 globalUseCase = get()
             ) }
     }

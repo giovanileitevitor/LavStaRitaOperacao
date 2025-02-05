@@ -16,9 +16,12 @@ data class ServiceEntity(
     @ColumnInfo(name = "clientPhone")
     val clientPhone: String,
 
-    @ColumnInfo(name = "totalItems")
-    val totalItems: Int,
+    @ColumnInfo(name = "idItems")
+    val idItems: Int,
 
-    @ColumnInfo(name = "idGroupItems")
-    val idGroupItems: Int
+    @ColumnInfo(name = "qtdItems")
+    val qtdItems: Int,
+
+    @ColumnInfo(name = "dataIn")
+    val dataIn: String
 )

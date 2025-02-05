@@ -1,15 +1,17 @@
-package br.lavstaritaoperacao.ui.home_operation
+package br.lavstaritaoperacao.ui.operation.edit_service
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import br.lavstaritaoperacao.aux.returnText
 import br.lavstaritaoperacao.domain.model.Service
 import br.lavstaritaoperacao.domain.usecase.GlobalUseCase
-import kotlinx.coroutines.delay
+import com.dantsu.escposprinter.EscPosPrinter
+import com.dantsu.escposprinter.connection.bluetooth.BluetoothPrintersConnections
 import kotlinx.coroutines.launch
 
-class OperationViewModel(
+class EditServiceViewModel(
     private val globalUseCase: GlobalUseCase
 ): ViewModel() {
 
@@ -22,12 +24,12 @@ class OperationViewModel(
     val onSuccess: LiveData<List<Service>> get() = _onSuccess
     private val _onSuccess: MutableLiveData<List<Service>> = MutableLiveData()
 
-    fun getServices(){
+
+    fun printService(service: Service){
         viewModelScope.launch {
-            _onLoading.value = true
-            _onSuccess.value = globalUseCase.getServices()
-            delay(500)
-            _onLoading.value = false
+            val escPrinter = EscPosPrinter(BluetoothPrintersConnections.selectFirstPaired(), 80, 48f, 32)
+            escPrinter.printFormattedText(returnText())
         }
     }
+
 }

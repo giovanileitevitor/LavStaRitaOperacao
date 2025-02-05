@@ -1,17 +1,16 @@
-package br.lavstaritaoperacao.ui.add_service
+package br.lavstaritaoperacao.ui.operation.home_operation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.lavstaritaoperacao.domain.model.Item
 import br.lavstaritaoperacao.domain.model.Service
-import br.lavstaritaoperacao.domain.model.emptyItemList
 import br.lavstaritaoperacao.domain.usecase.GlobalUseCase
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class AddServiceViewModel(
+class OperationViewModel(
     private val globalUseCase: GlobalUseCase
 ): ViewModel() {
 
@@ -21,28 +20,24 @@ class AddServiceViewModel(
     val onError: LiveData<Boolean> get() = _onError
     private val _onError: MutableLiveData<Boolean> = MutableLiveData()
 
-    val onSuccess: LiveData<Boolean> get() = _onSuccess
-    private val _onSuccess: MutableLiveData<Boolean> = MutableLiveData()
+    val onSuccess: LiveData<List<Service>> get() = _onSuccess
+    private val _onSuccess: MutableLiveData<List<Service>> = MutableLiveData()
 
-    val itemsAdded: LiveData<List<Item>> get() = _itemsAdded
-    private val _itemsAdded: MutableLiveData<List<Item>> = MutableLiveData()
-
-
-    fun createService(service: Service){
+    fun getServices(){
         viewModelScope.launch {
             _onLoading.value = true
-            _onSuccess.value  = globalUseCase.createService(service = service)
+            _onSuccess.value = globalUseCase.getServices()
             delay(500)
             _onLoading.value = false
         }
     }
 
-    fun addItem(item: Item){
+    fun deleteService(service: Service){
         viewModelScope.launch {
             _onLoading.value = true
-            globalUseCase.addItem(item = item)
-            refreshScreen()
-            delay(1000)
+            globalUseCase.deleteService(service = service)
+            _onSuccess.value = globalUseCase.getServices()
+            delay(500)
             _onLoading.value = false
         }
     }
@@ -50,9 +45,8 @@ class AddServiceViewModel(
     private fun refreshScreen(){
         viewModelScope.launch {
             _onLoading.value = true
-            _itemsAdded.value = globalUseCase.getItems()
+            _onSuccess.value = globalUseCase.getServices()
             _onLoading.value = false
         }
     }
-
 }
