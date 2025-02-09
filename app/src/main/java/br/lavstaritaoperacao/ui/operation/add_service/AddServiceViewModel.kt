@@ -26,12 +26,27 @@ class AddServiceViewModel(
     val itemsAdded: LiveData<List<Item>> get() = _itemsAdded
     private val _itemsAdded: MutableLiveData<List<Item>> = MutableLiveData()
 
+    private var nextGroupId: Int = 1
+    val nextServiceId: LiveData<Int> get() = _nextServiceId
+    private val _nextServiceId: MutableLiveData<Int> = MutableLiveData()
+
+//    init {
+//        viewModelScope.launch {
+//            nextGroupId = globalUseCase.getNextGroupId()
+//        }
+//    }
+
+    fun getNextServiceId(){
+        viewModelScope.launch {
+            _nextServiceId.value = globalUseCase.getNextGroupId() ?: 0
+        }
+    }
 
     fun createService(service: Service){
         viewModelScope.launch {
             _onLoading.value = true
-            if(service.clientName == "" || service.clientPhone == ""){
-                _onError.value = "Informe o Nome e o Telefone !"
+            if(service.clientName == "" || service.clientPhone == "" || service.qtdItems == 0){
+                _onError.value = "Informe o Nome e o Telefone e adicione items!"
             }else{
                 globalUseCase.addService(service = service)
                 refreshItem()
@@ -45,16 +60,25 @@ class AddServiceViewModel(
         viewModelScope.launch {
             _onLoading.value = true
             globalUseCase.addItem(item = item)
-            refreshScreen()
+            refreshScreen(id = item.serviceId)
             delay(1000)
             _onLoading.value = false
         }
     }
 
-    private fun refreshScreen(){
+    fun deleteItem(item: Item){
         viewModelScope.launch {
             _onLoading.value = true
-            _itemsAdded.value = globalUseCase.getItems()
+            globalUseCase.deleteItem(item = item)
+            refreshScreen()
+            _onLoading.value = false
+        }
+    }
+
+    private fun refreshScreen(id: Int? = 0){
+        viewModelScope.launch {
+            _onLoading.value = true
+            _itemsAdded.value = globalUseCase.getItemsByServiceId(id = id ?: 0)
             _onLoading.value = false
         }
     }
@@ -62,7 +86,7 @@ class AddServiceViewModel(
     private fun refreshItem(){
         viewModelScope.launch {
             _onLoading.value = true
-            val ack = globalUseCase.getServices().size ?: 0
+            val ack = globalUseCase.getALLServices().size ?: 0
             _onSuccess.value = if(ack >= 1) true else false
             _onLoading.value = false
         }

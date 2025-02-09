@@ -17,7 +17,21 @@ class LocalRepositoryImpl(
         itemDao.addItem(itemEntity = convertItem(item = item))
     }
 
-    override suspend fun getItems(): List<Item> {
+    override suspend fun getItemsByServiceId(id: Int): List<Item> {
+        return convertItemEntityIntoItem(items = itemDao.getAllItemsByServiceId(serviceId = id))
+    }
+
+    override suspend fun deleteItem(item: Item) {
+        item.id.let {
+            itemDao.deleteItem(itemId = it ?: 0)
+        }
+    }
+
+    override suspend fun deleteAllItems() {
+        itemDao.deleteAllItems()
+    }
+
+    override suspend fun getAllItems(): List<Item> {
         return convertItemEntityIntoItem(items = itemDao.getAllItems())
     }
 
@@ -25,18 +39,28 @@ class LocalRepositoryImpl(
         serviceDao.addService(serviceEntity = convertService(service = service))
     }
 
-    override suspend fun getServices(): List<Service> {
+    override suspend fun getALLServices(): List<Service> {
         return convertServiceEntityIntoService(services = serviceDao.getAllServices())
     }
 
     override suspend fun deleteService(service: Service) {
-        serviceDao.deleteService(serviceId = convertService(service = service).id ?: 0)
+        serviceDao.deleteService(serviceId = convertService(service = service).serviceId ?: 0)
+    }
+
+    override suspend fun deleteAllServices() {
+        serviceDao.deleteAllServices()
+    }
+
+    override suspend fun getNextGroupId(): Int {
+        return serviceDao.getNextServiceId() ?: 1
     }
 
     private fun convertItem(item: Item) : ItemEntity{
         return ItemEntity(
             name = item.name,
-            qtd = item.qtd
+            qtd = item.qtd,
+            serviceId = item.serviceId,
+            obs = item.obs
         )
     }
 
@@ -45,9 +69,11 @@ class LocalRepositoryImpl(
         items.forEach {
             itemList.add(
                 Item(
-                    id = it.id ?: 0,
+                    id = it.itemId,
                     name = it.name,
-                    qtd = it.qtd ?: 0
+                    qtd = it.qtd ?: 0,
+                    serviceId = it.serviceId,
+                    obs = it.obs ?: ""
                 )
             )
         }
@@ -56,12 +82,12 @@ class LocalRepositoryImpl(
 
     private fun convertService(service: Service): ServiceEntity{
         return ServiceEntity(
-            id = service.id ?: 0,
             clientName = service.clientName,
             clientPhone = service.clientPhone,
-            idItems = service.idItems,
+            serviceId = service.serviceId,
             qtdItems = service.qtdItems,
-            dataIn = service.dataIn
+            dataIn = service.dataIn,
+            statusService = ""
         )
     }
 
@@ -70,11 +96,10 @@ class LocalRepositoryImpl(
         services.forEach {
             serviceList.add(
                 Service(
-                    id = it.id ?: 0,
+                    serviceId = it.serviceId ?: 0,
                     clientName = it.clientName,
                     clientPhone = it.clientPhone,
                     qtdItems = it.qtdItems,
-                    idItems = it.idItems,
                     dataIn = it.dataIn
                 )
             )

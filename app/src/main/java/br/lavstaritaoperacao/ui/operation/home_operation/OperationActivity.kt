@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import br.lavstaritaoperacao.databinding.ActivityOperationBinding
 import br.lavstaritaoperacao.domain.model.Service
 import br.lavstaritaoperacao.ui.operation.add_service.AddServiceActivity
+import br.lavstaritaoperacao.ui.operation.configuration.ConfigurationActivity
 import br.lavstaritaoperacao.ui.operation.edit_service.EditServiceActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -34,6 +35,8 @@ class OperationActivity : AppCompatActivity() {
     }
 
     private fun setupView(){
+        binding.rvServices.setHasFixedSize(true)
+        binding.rvServices.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         viewModel.getServices()
     }
 
@@ -49,7 +52,11 @@ class OperationActivity : AppCompatActivity() {
 
         }
         binding.btnConfig.setOnClickListener {
-
+            val intent = Intent(this, ConfigurationActivity::class.java)
+            startActivity(intent)
+        }
+        binding.btnClearAll.setOnClickListener {
+            viewModel.clearAllDataBase()
         }
     }
 
@@ -68,8 +75,6 @@ class OperationActivity : AppCompatActivity() {
     }
 
     private fun setupServicesRV(services: List<Service>){
-        binding.rvServices.setHasFixedSize(true)
-        binding.rvServices.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         servicesAdapter = ServicesAdapter(data = services, singleClick, onLongClick)
         binding.rvServices.adapter = servicesAdapter
     }

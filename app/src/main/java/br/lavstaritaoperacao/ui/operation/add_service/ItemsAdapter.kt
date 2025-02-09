@@ -11,7 +11,8 @@ import br.lavstaritaoperacao.domain.model.Item
 
 class ItemsAdapter (
     private val data: List<Item>,
-    private val itemListener: (Item) -> Unit
+    private val itemListener: (Item) -> Unit,
+    private val itemLongListener: (Item) -> Unit
 ) : RecyclerView.Adapter<ItemsAdapter.ViewHolder>(){
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -33,6 +34,11 @@ class ItemsAdapter (
 
         holder.containerItem.setOnClickListener {
             itemListener(item)
+        }
+
+        holder.containerItem.setOnLongClickListener {
+            itemLongListener(item)
+            return@setOnLongClickListener true
         }
     }
 

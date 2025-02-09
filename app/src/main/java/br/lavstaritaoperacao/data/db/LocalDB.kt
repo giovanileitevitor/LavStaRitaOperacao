@@ -14,7 +14,7 @@ import br.lavstaritaoperacao.data.db.entities.ServiceEntity
         ItemEntity::class,
         ServiceEntity::class
     ],
-    version = 2,
+    version = 1,
     exportSchema = false
 )
 abstract class LocalDB: RoomDatabase() {

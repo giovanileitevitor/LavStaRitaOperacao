@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/loadingBox"
+        layout="@layout/loading_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        tools:visibility="invisible"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideCenter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.50"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideCenterHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.60"/>
+
+    <TextView
+        android:id="@+id/txtAppName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/size_24"
+        android:fontFamily="@font/advent_pro"
+        android:text="@string/txt_painel_configurar"
+        android:textColor="@color/blue_lav"
+        android:textSize="@dimen/font_size_24"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/btnVoltar"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btnVoltar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_20"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/img_description"
+        android:src="@drawable/ic_voltar"
+        app:layout_constraintBottom_toBottomOf="@id/txtAppName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/txtAppName"/>
+
+    <ImageButton
+        android:id="@+id/btnCancelar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/size_32"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/img_description"
+        android:src="@drawable/ic_exit"
+        app:layout_constraintBottom_toBottomOf="@id/txtAppName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/txtAppName" />
+
+    <TextView
+        android:id="@+id/labelServices"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_24"
+        android:layout_marginTop="@dimen/size_20"
+        android:text="@string/label_services_qtd"
+        android:textColor="@color/blue_lav"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtAppName"
+        tools:text="Serviços: 0" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvServices"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/match_constraint"
+        android:layout_marginStart="@dimen/size_8"
+        android:layout_marginTop="@dimen/size_4"
+        android:layout_marginEnd="@dimen/size_8"
+        android:layout_marginBottom="@dimen/size_4"
+        android:background="@drawable/qtd_corner"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@id/guideCenterHorizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/labelServices"
+        tools:itemCount="5"
+        tools:listitem="@layout/item_service"
+        tools:orientation="vertical"/>
+
+    <TextView
+        android:id="@+id/labelItems"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_24"
+        android:layout_marginTop="@dimen/size_20"
+        android:text="@string/label_client_itens"
+        android:textColor="@color/blue_lav"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rvServices"
+        tools:text="Items: 0" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvItems"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/match_constraint"
+        android:layout_marginStart="@dimen/size_14"
+        android:layout_marginEnd="@dimen/size_14"
+        android:layout_marginBottom="@dimen/size_10"
+        android:background="@drawable/qtd_corner"
+        android:padding="@dimen/size_6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/labelItems"
+        tools:itemCount="3"
+        tools:listitem="@layout/item_item"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

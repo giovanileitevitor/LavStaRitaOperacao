@@ -6,9 +6,10 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "serviceTB")
 data class ServiceEntity(
-    @ColumnInfo(name = "id")
+
+    @ColumnInfo(name = "serviceId")
     @PrimaryKey(autoGenerate = true)
-    val id: Int? = null,
+    val serviceId: Int? = null,
 
     @ColumnInfo(name = "clientName")
     val clientName: String,
@@ -16,11 +17,11 @@ data class ServiceEntity(
     @ColumnInfo(name = "clientPhone")
     val clientPhone: String,
 
-    @ColumnInfo(name = "idItems")
-    val idItems: Int,
-
     @ColumnInfo(name = "qtdItems")
     val qtdItems: Int,
+
+    @ColumnInfo(name = "statusService")
+    val statusService: String,
 
     @ColumnInfo(name = "dataIn")
     val dataIn: String

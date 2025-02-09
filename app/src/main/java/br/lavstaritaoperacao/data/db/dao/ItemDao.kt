@@ -15,15 +15,20 @@ interface ItemDao{
     @Query("SELECT * FROM itemTB")
     suspend fun getAllItems(): List<ItemEntity>
 
-    @Query("SELECT * FROM itemTB WHERE id = :id")
+    @Query("SELECT * FROM itemTB WHERE  serviceId = :serviceId")
+    suspend fun getAllItemsByServiceId(serviceId: Int): List<ItemEntity>
+
+    @Query("SELECT * FROM itemTB WHERE itemId = :id")
     suspend fun getItemsfromDB(id: Int): List<ItemEntity>
 
-    @Query("DELETE FROM itemTB WHERE id = :id")
-    fun deleteItem(id: Int)
+    @Query("DELETE FROM itemTB WHERE itemId = :itemId")
+    suspend fun deleteItem(itemId: Int)
 
-    @Query("UPDATE itemTB SET name = :name, qtd = :qtd WHERE id = :id")
-    suspend fun updateItems(id : Int, name: String, qtd: Int)
+    @Query("UPDATE itemTB SET name = :name, qtd = :qtd WHERE itemId = :itemId")
+    suspend fun updateItems(itemId : Int, name: String, qtd: Int)
 
+    @Query("DELETE FROM itemTB ")
+    suspend fun deleteAllItems()
 
 //    @Query("DELETE FROM itemTB WHERE isTemporary = :isTemporary")
 //    fun deleteAllTemporarySteps(isTemporary: Boolean)

@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.lavstaritaoperacao.domain.model.Service
 import br.lavstaritaoperacao.domain.usecase.GlobalUseCase
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -26,7 +25,7 @@ class OperationViewModel(
     fun getServices(){
         viewModelScope.launch {
             _onLoading.value = true
-            _onSuccess.value = globalUseCase.getServices()
+            _onSuccess.value = globalUseCase.getALLServices()
             delay(500)
             _onLoading.value = false
         }
@@ -36,8 +35,19 @@ class OperationViewModel(
         viewModelScope.launch {
             _onLoading.value = true
             globalUseCase.deleteService(service = service)
-            _onSuccess.value = globalUseCase.getServices()
             delay(500)
+            _onSuccess.value = globalUseCase.getALLServices()
+            delay(500)
+            _onLoading.value = false
+        }
+    }
+
+    fun clearAllDataBase(){
+        viewModelScope.launch {
+            _onLoading.value = true
+            globalUseCase.deleteAllServices()
+            globalUseCase.deleteAllItems()
+            _onSuccess.value = globalUseCase.getALLServices()
             _onLoading.value = false
         }
     }
@@ -45,7 +55,7 @@ class OperationViewModel(
     private fun refreshScreen(){
         viewModelScope.launch {
             _onLoading.value = true
-            _onSuccess.value = globalUseCase.getServices()
+            _onSuccess.value = globalUseCase.getALLServices()
             _onLoading.value = false
         }
     }

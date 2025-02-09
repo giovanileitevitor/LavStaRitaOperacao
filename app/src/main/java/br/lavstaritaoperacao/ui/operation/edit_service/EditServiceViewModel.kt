@@ -9,6 +9,7 @@ import br.lavstaritaoperacao.domain.model.Service
 import br.lavstaritaoperacao.domain.usecase.GlobalUseCase
 import com.dantsu.escposprinter.EscPosPrinter
 import com.dantsu.escposprinter.connection.bluetooth.BluetoothPrintersConnections
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class EditServiceViewModel(
@@ -24,11 +25,26 @@ class EditServiceViewModel(
     val onSuccess: LiveData<List<Service>> get() = _onSuccess
     private val _onSuccess: MutableLiveData<List<Service>> = MutableLiveData()
 
+    val onExcludeSuccess: LiveData<Boolean> get() = _onExcludeSuccess
+    private val _onExcludeSuccess: MutableLiveData<Boolean> = MutableLiveData()
+
 
     fun printService(service: Service){
         viewModelScope.launch {
+            _onLoading.value = true
+            delay(500)
             val escPrinter = EscPosPrinter(BluetoothPrintersConnections.selectFirstPaired(), 80, 48f, 32)
             escPrinter.printFormattedText(returnText())
+            _onLoading.value = false
+        }
+    }
+
+    fun deleteService(service: Service){
+        viewModelScope.launch {
+            _onLoading.value = true
+            globalUseCase.deleteService(service = service)
+            _onExcludeSuccess.value = true
+            _onLoading.value = false
         }
     }
 

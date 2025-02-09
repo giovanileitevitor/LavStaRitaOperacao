@@ -57,5 +57,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/txtAppName" />
 
+    <ImageButton
+        android:id="@+id/btnExcluir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/size_32"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/img_description"
+        android:src="@drawable/ic_excluir"
+        app:layout_constraintBottom_toBottomOf="@id/txtAppName"
+        app:layout_constraintEnd_toStartOf="@id/btnImprimir"
+        app:layout_constraintTop_toTopOf="@id/txtAppName" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

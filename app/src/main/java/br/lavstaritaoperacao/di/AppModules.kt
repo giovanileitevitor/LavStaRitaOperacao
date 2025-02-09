@@ -8,6 +8,7 @@ import br.lavstaritaoperacao.domain.usecase.GlobalUseCaseImpl
 import br.lavstaritaoperacao.ui.operation.add_service.AddServiceViewModel
 import br.lavstaritaoperacao.ui.operation.home_operation.OperationViewModel
 import br.lavstaritaoperacao.ui.login.LoginViewModel
+import br.lavstaritaoperacao.ui.operation.configuration.ConfigurationViewModel
 import br.lavstaritaoperacao.ui.operation.edit_service.EditServiceViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -39,6 +40,10 @@ object AppModules {
 
         viewModel { EditServiceViewModel(
                 globalUseCase = get()
+            ) }
+
+        viewModel { ConfigurationViewModel(
+            globalUseCase = get()
             ) }
     }
 

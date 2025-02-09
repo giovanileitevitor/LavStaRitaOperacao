@@ -59,17 +59,29 @@
 
     <TextView
         android:id="@+id/labelClient"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/size_24"
         android:layout_marginTop="@dimen/size_20"
         android:text="@string/label_client_name"
         android:textColor="@color/blue_lav"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txtAppName"
         tools:text="Nome do Cliente:" />
+
+    <TextView
+        android:id="@+id/labelIdService"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/size_24"
+        android:layout_marginTop="@dimen/size_20"
+        android:text="@string/label_id_service"
+        android:textColor="@color/blue_lav"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtAppName"
+        tools:text="ID: xxxx" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/edtGo"

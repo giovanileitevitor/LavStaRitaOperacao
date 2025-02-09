@@ -46,6 +46,11 @@
             android:exported="true">
         </activity>
 
+        <activity
+            android:name=".ui.operation.configuration.ConfigurationActivity"
+            android:exported="true">
+        </activity>
+
     </application>
 
 </manifest>
