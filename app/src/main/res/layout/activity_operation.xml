@@ -83,31 +83,31 @@
         tools:text="Serviços:" />
 
     <View
+        android:id="@+id/view_services"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_1"
         android:layout_marginStart="@dimen/size_10"
         android:layout_marginTop="@dimen/size_2"
         android:layout_marginEnd="@dimen/size_10"
         android:background="@color/blue_lav"
-        android:id="@+id/view_services"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/labelServices"/>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvServices"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:id="@+id/rvServices"
-        android:layout_marginTop="@dimen/size_4"
         android:layout_marginStart="@dimen/size_8"
+        android:layout_marginTop="@dimen/size_4"
         android:layout_marginEnd="@dimen/size_8"
         android:layout_marginBottom="@dimen/size_4"
-        android:orientation="vertical"
         android:background="@android:color/transparent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_services"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_services"
         tools:itemCount="5"
         tools:listitem="@layout/item_service"
         tools:orientation="vertical"/>
@@ -117,24 +117,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/size_20"
-        android:text="Adicionar serviço"
+        android:text="@string/btn_add_service"
         android:textColor="@color/white"
         app:backgroundTint="@color/blue_lav"
         app:icon="@drawable/ic_add_service"
         app:iconTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
-
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/btnClearAll"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/size_20"
-        android:text="X"
-        android:textColor="@color/white"
-        app:backgroundTint="@color/blue_lav"
-        app:iconTint="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

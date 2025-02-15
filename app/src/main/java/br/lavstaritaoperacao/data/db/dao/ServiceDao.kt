@@ -18,8 +18,14 @@ interface ServiceDao {
     @Query("DELETE FROM serviceTB WHERE serviceId = :serviceId")
     suspend fun deleteService(serviceId: Int)
 
-    @Query("UPDATE serviceTB SET qtdItems = :qtdItems WHERE serviceId = :serviceId")
-    suspend fun updateService(serviceId: Int, qtdItems: Int)
+    @Query("UPDATE serviceTB SET qtdItems = :qtdItems, statusService = :statusService, obs = :obs , price = :price WHERE serviceId = :serviceId")
+    suspend fun updateService(
+        serviceId: Int,
+        qtdItems: Int,
+        statusService: String,
+        obs: String,
+        price: String
+    )
 
     @Query("SELECT MAX(serviceId) + 1 FROM serviceTB")
     suspend fun getNextServiceId(): Int?

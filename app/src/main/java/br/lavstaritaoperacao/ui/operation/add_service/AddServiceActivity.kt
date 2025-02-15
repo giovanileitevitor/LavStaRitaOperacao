@@ -1,18 +1,26 @@
 package br.lavstaritaoperacao.ui.operation.add_service
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.lavstaritaoperacao.R
-import br.lavstaritaoperacao.aux.Mask
+import br.lavstaritaoperacao.aux.MaskCPF
+import br.lavstaritaoperacao.aux.formatCurrency
 import br.lavstaritaoperacao.aux.getDateAndTime
+import br.lavstaritaoperacao.aux.hideKeyboard
 import br.lavstaritaoperacao.databinding.ActivityAddServiceBinding
+import br.lavstaritaoperacao.databinding.DialogAddItemBinding
 import br.lavstaritaoperacao.domain.model.Item
 import br.lavstaritaoperacao.domain.model.Service
 import br.lavstaritaoperacao.domain.model.gerarNomeDeRoupaAleatorio
+import com.santalu.maskara.Mask
+import com.santalu.maskara.MaskChangedListener
+import com.santalu.maskara.MaskStyle
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.random.Random
 
@@ -23,6 +31,8 @@ class AddServiceActivity: AppCompatActivity() {
     private lateinit var itemsAdapter: ItemsAdapter
     private lateinit var clientName: String
     private lateinit var clientPhone: String
+    private lateinit var clientObs: String
+    private lateinit var clientPrice: String
     private var items: List<Item> = emptyList()
     private var serviceId: Int? = 0
 
@@ -36,7 +46,8 @@ class AddServiceActivity: AppCompatActivity() {
     }
 
     private fun setupView(){
-        binding.edtClientFone.addTextChangedListener(Mask.mask("(##) #####-####", binding.edtClientFone))
+        binding.edtClientFone.addTextChangedListener(MaskCPF.mask("(##) #####-####", binding.edtClientFone))
+        formatCurrency(binding.edtPriceDetail)
         binding.labelItems.text = getString(R.string.label_client_itens, "0")
         binding.labelIdService.text = getString(R.string.label_id_service, "-")
         binding.rvItems.setHasFixedSize(true)
@@ -61,11 +72,14 @@ class AddServiceActivity: AppCompatActivity() {
                     serviceId = serviceId,
                     obs = " - "
             ))
+            //dialogAddStep()
         }
 
         binding.btnCreateService.setOnClickListener {
             clientName = binding.edtClientName.text.toString()
             clientPhone = binding.edtClientFone.text.toString()
+            clientObs = binding.edtObsDetail.text.toString()
+            clientPrice = binding.edtPriceDetail.text.toString()
 
             viewModel.createService(
                 service = Service(
@@ -73,7 +87,10 @@ class AddServiceActivity: AppCompatActivity() {
                     clientName = clientName,
                     clientPhone = clientPhone,
                     qtdItems = items.size ?: 0,
-                    dataIn = getDateAndTime()
+                    dataIn = getDateAndTime(),
+                    statusService = "Lavagem",
+                    obs = clientObs,
+                    price = clientPrice
                 )
             )
         }
@@ -123,5 +140,31 @@ class AddServiceActivity: AppCompatActivity() {
 
     private val longClick = { item: Item ->
         viewModel.deleteItem(item = item)
+    }
+
+    private fun dialogAddStep(){
+        val customDialog = AlertDialog.Builder(this).create()
+        val bind : DialogAddItemBinding = DialogAddItemBinding.inflate(LayoutInflater.from(this))
+        customDialog.apply {
+            setView(bind.root)
+            setCancelable(true)
+        }.show()
+
+        bind.btnAddStep.setOnClickListener {
+            val stepText = bind.edtDetail.editableText.toString()
+            if(stepText.isNotBlank()){
+                hideKeyboard()
+                //viewModel.addNewStep(stepText = stepText)
+                customDialog.dismiss()
+            }else{
+                hideKeyboard()
+                customDialog.dismiss()
+            }
+        }
+
+        bind.btnSkipStep.setOnClickListener {
+            customDialog.dismiss()
+        }
+
     }
 }

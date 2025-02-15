@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.lavstaritaoperacao.aux.returnText
+import br.lavstaritaoperacao.domain.model.Item
 import br.lavstaritaoperacao.domain.model.Service
 import br.lavstaritaoperacao.domain.usecase.GlobalUseCase
 import com.dantsu.escposprinter.EscPosPrinter
@@ -22,8 +23,8 @@ class EditServiceViewModel(
     val onError: LiveData<Boolean> get() = _onError
     private val _onError: MutableLiveData<Boolean> = MutableLiveData()
 
-    val onSuccess: LiveData<List<Service>> get() = _onSuccess
-    private val _onSuccess: MutableLiveData<List<Service>> = MutableLiveData()
+    val onSuccess: LiveData<List<Item>> get() = _onSuccess
+    private val _onSuccess: MutableLiveData<List<Item>> = MutableLiveData()
 
     val onExcludeSuccess: LiveData<Boolean> get() = _onExcludeSuccess
     private val _onExcludeSuccess: MutableLiveData<Boolean> = MutableLiveData()
@@ -33,8 +34,9 @@ class EditServiceViewModel(
         viewModelScope.launch {
             _onLoading.value = true
             delay(500)
+            val items = globalUseCase.getItemsByServiceId(serviceId = service.serviceId ?: 0)
             val escPrinter = EscPosPrinter(BluetoothPrintersConnections.selectFirstPaired(), 80, 48f, 32)
-            escPrinter.printFormattedText(returnText())
+            escPrinter.printFormattedText(returnText(service = service, items = items))
             _onLoading.value = false
         }
     }
@@ -44,6 +46,24 @@ class EditServiceViewModel(
             _onLoading.value = true
             globalUseCase.deleteService(service = service)
             _onExcludeSuccess.value = true
+            _onLoading.value = false
+        }
+    }
+
+    fun getAllItemsFromServiceId(serviceId: Int){
+        viewModelScope.launch {
+            _onLoading.value = true
+            _onSuccess.value = globalUseCase.getItemsByServiceId(serviceId = serviceId)
+            delay(500)
+            _onLoading.value = false
+        }
+    }
+
+    fun updateService(service: Service){
+        viewModelScope.launch {
+            _onLoading.value = true
+            globalUseCase.updateService(service = service)
+            delay(500)
             _onLoading.value = false
         }
     }

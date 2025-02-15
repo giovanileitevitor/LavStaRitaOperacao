@@ -147,9 +147,95 @@
             android:layout_height="wrap_content"
             android:autofillHints=""
             android:background="@null"
-            android:imeOptions="actionDone"
+            android:imeOptions="actionNext"
             android:hint="@string/edt_client"
             android:inputType="phone"
+            android:lines="1"
+            android:maxLength="50"
+            android:maxLines="1"
+            android:textColor="@color/blue_lav"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/labelObservation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_24"
+        android:layout_marginTop="@dimen/size_10"
+        android:text="@string/label_client_observation"
+        android:textColor="@color/blue_lav"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edtTelefone"
+        tools:text="Observações:" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edtObs"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="@dimen/size_20"
+        android:layout_marginTop="@dimen/match_constraint"
+        android:layout_marginEnd="@dimen/size_20"
+        app:boxStrokeColor="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/labelObservation">
+
+        <EditText
+            android:id="@+id/edtObsDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:background="@null"
+            android:hint="@string/edt_client"
+            android:imeOptions="actionNext"
+            android:inputType="textCapSentences"
+            android:lines="2"
+            android:maxLength="200"
+            android:maxLines="2"
+            android:textColor="@color/blue_lav"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/labelPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_24"
+        android:layout_marginTop="@dimen/size_10"
+        android:text="@string/label_price"
+        android:textColor="@color/blue_lav"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edtObs"
+        tools:text="Orçamento em R$:" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edtPrice"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="@dimen/size_20"
+        android:layout_marginTop="@dimen/match_constraint"
+        android:layout_marginEnd="@dimen/size_20"
+        app:boxStrokeColor="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/labelPrice">
+
+        <EditText
+            android:id="@+id/edtPriceDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:background="@null"
+            android:hint="@string/edt_client"
+            android:imeOptions="actionDone"
+            android:inputType="numberDecimal"
             android:lines="1"
             android:maxLength="50"
             android:maxLines="1"
@@ -167,7 +253,7 @@
         android:textColor="@color/blue_lav"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edtTelefone"
+        app:layout_constraintTop_toBottomOf="@id/edtPrice"
         tools:text="Items:" />
 
     <TextView
@@ -183,7 +269,7 @@
         android:textColor="@color/blue_lav"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edtTelefone"
+        app:layout_constraintTop_toBottomOf="@id/edtPrice"
         tools:text="INCLUIR" />
 
     <androidx.recyclerview.widget.RecyclerView

@@ -19,6 +19,7 @@ class ServicesAdapter (
         val client: TextView = view.findViewById(R.id.txtClientName)
         val dateIn: TextView = view.findViewById(R.id.txtData)
         val qtd: TextView = view.findViewById(R.id.qtdItems)
+        val price: TextView = view.findViewById(R.id.txtPrice)
         val containerItem: ConstraintLayout = view.findViewById(R.id.containerItem)
     }
 
@@ -31,8 +32,9 @@ class ServicesAdapter (
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = data[position]
         holder.client.text = "Cliente: " + item.clientName
-        holder.dateIn.text = "Entrada:" + item.dataIn
+        holder.dateIn.text = "Entrada: " + item.dataIn
         holder.qtd.text = item.qtdItems.toString() + " itens"
+        holder.price.text = "Preço: " + item.price.toString()
 
         holder.containerItem.setOnClickListener {
             itemListener.invoke(item)

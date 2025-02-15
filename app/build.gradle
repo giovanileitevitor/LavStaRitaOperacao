@@ -71,4 +71,6 @@ dependencies {
     implementation(libs.escpos.thermalprinter.android)
     implementation(libs.accompanist.permissions)
 
+    //Mask
+    implementation libs.maskara
 }

@@ -4,7 +4,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
 
-class Mask{
+class MaskCPF{
     companion object {
         private fun replaceChars(cpfFull : String) : String{
             return cpfFull.replace(".", "").replace("-", "")

@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import br.lavstaritaoperacao.aux.Mask
+import br.lavstaritaoperacao.aux.MaskCPF
 import br.lavstaritaoperacao.aux.PermissionUtils
 import br.lavstaritaoperacao.aux.hideKeyboard
 import br.lavstaritaoperacao.aux.onDebouncedListener
@@ -37,7 +37,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun setupView(){
         binding.txtVersion.text = "Version: 1.0.0"
-        binding.edtCpf.addTextChangedListener(Mask.mask("###.###.###-##", binding.edtCpf))
+        binding.edtCpf.addTextChangedListener(MaskCPF.mask("###.###.###-##", binding.edtCpf))
         //binding.txtStatus.text = "Awaiting...."
         binding.txtRedes.text = "Saiba mais em:"
     }

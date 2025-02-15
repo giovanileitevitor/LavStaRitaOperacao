@@ -12,13 +12,19 @@
     <string name="txt_editar_service">Editar Serviço</string>
     <string name="txt_painel_configurar">Configurações</string>
     <string name="label_services">Serviços: </string>
+    <string name="label_price">Orçamento em R$: </string>
     <string name="label_services_qtd">Serviços: %S </string>
     <string name="label_client_name">Nome do cliente: </string>
     <string name="label_id_service">ID: %S </string>
     <string name="label_client_fone">Telefone de contato: </string>
     <string name="label_client_itens">Items: %S </string>
+    <string name="label_client_total_itens">Total de Items: </string>
+    <string name="label_client_observation">Observações: </string>
+    <string name="label_status_service">Status do serviço: </string>
     <string name="label_incluir"><u>+ INCLUIR</u></string>
     <string name="label_payment">Pago antecipado ?  </string>
     <string name="btn_registrar_service">Registrar Serviço</string>
+    <string name="btn_add_service">Adicionar serviço</string>
+    <string name="dialog_add_title">Selecione o tipo de item:</string>
 
 </resources>

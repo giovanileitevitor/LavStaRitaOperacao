@@ -11,9 +11,10 @@ interface GlobalUseCase {
     suspend fun deleteService(service: Service)
     suspend fun deleteAllServices()
     suspend fun deleteAllItems()
-    suspend fun getItemsByServiceId(id: Int): List<Item>
+    suspend fun getItemsByServiceId(serviceId: Int): List<Item>
     suspend fun addItem(item: Item)
     suspend fun deleteItem(item: Item)
     suspend fun getAllItems(): List<Item>
+    suspend fun updateService(service: Service)
 
 }

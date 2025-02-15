@@ -5,7 +5,7 @@ import br.lavstaritaoperacao.domain.model.Service
 
 interface LocalRepository {
     suspend fun addItem(item: Item)
-    suspend fun getItemsByServiceId(id: Int): List<Item>
+    suspend fun getItemsByServiceId(serviceId: Int): List<Item>
     suspend fun deleteItem(item: Item)
     suspend fun deleteAllItems()
     suspend fun getAllItems(): List<Item>
@@ -14,4 +14,5 @@ interface LocalRepository {
     suspend fun deleteService(service: Service)
     suspend fun deleteAllServices()
     suspend fun getNextGroupId(): Int
+    suspend fun updateService(service: Service)
 }

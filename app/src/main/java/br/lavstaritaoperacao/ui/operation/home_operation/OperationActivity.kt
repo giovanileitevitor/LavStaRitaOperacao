@@ -55,9 +55,7 @@ class OperationActivity : AppCompatActivity() {
             val intent = Intent(this, ConfigurationActivity::class.java)
             startActivity(intent)
         }
-        binding.btnClearAll.setOnClickListener {
-            viewModel.clearAllDataBase()
-        }
+
     }
 
     private fun setupObservers(){

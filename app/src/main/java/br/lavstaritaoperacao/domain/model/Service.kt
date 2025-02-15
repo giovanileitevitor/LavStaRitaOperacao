@@ -7,7 +7,10 @@ data class Service(
     var clientName: String,
     var clientPhone: String,
     var qtdItems: Int,
-    var dataIn: String
+    var statusService: String,
+    var obs: String? = "-",
+    var dataIn: String,
+    var price: String
 ) : Serializable
 
 fun generateServices(qtd: Int): ArrayList<Service>{
@@ -20,7 +23,10 @@ fun generateServices(qtd: Int): ArrayList<Service>{
                 clientName = "Giovani Leite",
                 clientPhone = "11 975313142",
                 qtdItems = 10,
-                dataIn = "10 / Jan / 2025"
+                dataIn = "10 / Jan / 2025",
+                obs = "-",
+                statusService = "",
+                price = "R$ 10"
             )
         )
     }
@@ -35,6 +41,10 @@ fun emptyService(): Service {
         clientName = "invalid client",
         clientPhone = "00 00000-0000",
         dataIn = "01 / 01 / 0000",
-        qtdItems = 0
+        qtdItems = 0,
+        obs = "sem observações",
+        statusService = "Lavagem",
+        price = "R$ 0,00"
     )
 }
+

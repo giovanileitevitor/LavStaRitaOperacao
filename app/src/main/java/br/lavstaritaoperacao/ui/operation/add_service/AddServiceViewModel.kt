@@ -45,8 +45,8 @@ class AddServiceViewModel(
     fun createService(service: Service){
         viewModelScope.launch {
             _onLoading.value = true
-            if(service.clientName == "" || service.clientPhone == "" || service.qtdItems == 0){
-                _onError.value = "Informe o Nome e o Telefone e adicione items!"
+            if(service.clientName == "" || service.clientPhone == "" || service.qtdItems == 0 || service.price.isBlank()){
+                _onError.value = "Preencha todos os campos no cadastro !!!"
             }else{
                 globalUseCase.addService(service = service)
                 refreshItem()
@@ -78,7 +78,7 @@ class AddServiceViewModel(
     private fun refreshScreen(id: Int? = 0){
         viewModelScope.launch {
             _onLoading.value = true
-            _itemsAdded.value = globalUseCase.getItemsByServiceId(id = id ?: 0)
+            _itemsAdded.value = globalUseCase.getItemsByServiceId(serviceId = id ?: 0)
             _onLoading.value = false
         }
     }

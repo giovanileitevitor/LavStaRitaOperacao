@@ -17,8 +17,8 @@ class LocalRepositoryImpl(
         itemDao.addItem(itemEntity = convertItem(item = item))
     }
 
-    override suspend fun getItemsByServiceId(id: Int): List<Item> {
-        return convertItemEntityIntoItem(items = itemDao.getAllItemsByServiceId(serviceId = id))
+    override suspend fun getItemsByServiceId(serviceId: Int): List<Item> {
+        return convertItemEntityIntoItem(items = itemDao.getAllItemsByServiceId(serviceId = serviceId))
     }
 
     override suspend fun deleteItem(item: Item) {
@@ -55,6 +55,16 @@ class LocalRepositoryImpl(
         return serviceDao.getNextServiceId() ?: 1
     }
 
+    override suspend fun updateService(service: Service) {
+        serviceDao.updateService(
+            serviceId = service.serviceId ?: 0,
+            qtdItems = service.qtdItems ?: 0,
+            statusService = service.statusService,
+            obs = service.obs ?: "-",
+            price = service.price
+            )
+    }
+
     private fun convertItem(item: Item) : ItemEntity{
         return ItemEntity(
             name = item.name,
@@ -82,12 +92,14 @@ class LocalRepositoryImpl(
 
     private fun convertService(service: Service): ServiceEntity{
         return ServiceEntity(
+            serviceId = service.serviceId,
             clientName = service.clientName,
             clientPhone = service.clientPhone,
-            serviceId = service.serviceId,
             qtdItems = service.qtdItems,
+            statusService = service.statusService,
+            obs = service.obs ?: "-",
             dataIn = service.dataIn,
-            statusService = ""
+            price = service.price
         )
     }
 
@@ -100,7 +112,10 @@ class LocalRepositoryImpl(
                     clientName = it.clientName,
                     clientPhone = it.clientPhone,
                     qtdItems = it.qtdItems,
-                    dataIn = it.dataIn
+                    statusService = it.statusService,
+                    obs = it.obs,
+                    dataIn = it.dataIn,
+                    price = it.price
                 )
             )
         }

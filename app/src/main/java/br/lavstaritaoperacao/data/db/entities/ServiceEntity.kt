@@ -23,6 +23,13 @@ data class ServiceEntity(
     @ColumnInfo(name = "statusService")
     val statusService: String,
 
+    @ColumnInfo(name = "obs")
+    val obs: String,
+
+    @ColumnInfo(name = "price")
+    val price: String,
+
     @ColumnInfo(name = "dataIn")
     val dataIn: String
+
 )

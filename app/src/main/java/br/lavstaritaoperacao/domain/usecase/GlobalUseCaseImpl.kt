@@ -36,8 +36,8 @@ class GlobalUseCaseImpl(
         localRepository.deleteAllServices()
     }
 
-    override suspend fun getItemsByServiceId(id: Int): List<Item> {
-        return localRepository.getItemsByServiceId(id = id)
+    override suspend fun getItemsByServiceId(serviceId: Int): List<Item> {
+        return localRepository.getItemsByServiceId(serviceId = serviceId)
     }
 
     override suspend fun addItem(item: Item) {
@@ -54,5 +54,9 @@ class GlobalUseCaseImpl(
 
     override suspend fun getAllItems(): List<Item> {
         return localRepository.getAllItems()
+    }
+
+    override suspend fun updateService(service: Service) {
+        localRepository.updateService(service = service)
     }
 }
