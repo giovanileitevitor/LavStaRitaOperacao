@@ -3,6 +3,8 @@ package br.lavstaritaoperacao.data.db.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import br.lavstaritaoperacao.domain.model.StatusPayment
+import br.lavstaritaoperacao.domain.model.StatusService
 
 @Entity(tableName = "serviceTB")
 data class ServiceEntity(
@@ -21,7 +23,10 @@ data class ServiceEntity(
     val qtdItems: Int,
 
     @ColumnInfo(name = "statusService")
-    val statusService: String,
+    val statusService: StatusService? = StatusService.EM_LAVAGEM,
+
+    @ColumnInfo(name = "statusPayment")
+    val statusPayment: StatusPayment? = StatusPayment.NOT_PAID,
 
     @ColumnInfo(name = "obs")
     val obs: String,

@@ -70,17 +70,57 @@
 
     <TextView
         android:id="@+id/labelServices"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/size_24"
-        android:layout_marginTop="@dimen/size_8"
+        android:layout_marginTop="@dimen/size_12"
         android:text="@string/label_services"
         android:textColor="@color/blue_lav"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txtAppName"
         tools:text="Serviços:" />
+
+    <TextView
+        android:id="@+id/btnFinalizado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/size_14"
+        android:layout_marginTop="@dimen/size_4"
+        android:text="@string/btn_finalizado"
+        android:textColor="@color/white"
+        android:background="@color/green_garden"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_services"
+        tools:text="+ Finalizado" />
+
+    <TextView
+        android:id="@+id/btnPendente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/size_24"
+        android:layout_marginTop="@dimen/size_4"
+        android:text="@string/btn_pendente"
+        android:textColor="@color/white"
+        android:background="@color/red_nirvana"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@id/btnFinalizado"
+        app:layout_constraintTop_toBottomOf="@id/view_services"
+        tools:text="+ Pendente" />
+
+    <TextView
+        android:id="@+id/btnTodos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/size_24"
+        android:layout_marginTop="@dimen/size_4"
+        android:text="@string/btn_todos"
+        android:textColor="@color/blue_lav"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@id/btnPendente"
+        app:layout_constraintTop_toBottomOf="@id/view_services"
+        tools:text="+ Todos" />
 
     <View
         android:id="@+id/view_services"
@@ -107,7 +147,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_services"
+        app:layout_constraintTop_toBottomOf="@+id/btnTodos"
         tools:itemCount="5"
         tools:listitem="@layout/item_service"
         tools:orientation="vertical"/>

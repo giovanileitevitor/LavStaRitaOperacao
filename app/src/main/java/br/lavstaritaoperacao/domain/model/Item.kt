@@ -63,6 +63,26 @@ fun gerarNomeDeRoupaAleatorio(): String {
     return roupas[indiceAleatorio]
 }
 
+fun roupas() = listOf(
+    "Camiseta",
+    "Calça",
+    "Camisa",
+    "Cueca",
+    "Pijama",
+    "Blusa",
+    "Casaco",
+    "Vestido",
+    "Saia",
+    "Shorts",
+    "Meias",
+    "Sutiã",
+    "Calcinha",
+    "Boné",
+    "Chapéu",
+    "Luvas",
+    "Cachecol"
+)
+
 fun gerarListaDeNomesDeRoupasAleatorios(quantidade: Int): List<String> {
     val lista = mutableListOf<String>()
     for (i in 0 until quantidade) {

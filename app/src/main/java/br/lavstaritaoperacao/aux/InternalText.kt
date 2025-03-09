@@ -28,7 +28,7 @@ internal fun returnText(service: Service, items: List<Item>): String{
 //            "[R]TAX :[R]4.23e\n" +
 //            "[L]\n" +
             "[C]================================\n" +
-            "[L]Preço: [R]R$45,00\n" +
+            "[L]Orçamento: [R]${service.price}\n" +
             "[L]\n" +
             "[L]<font size='tall'>Cliente :</font>\n" +
             "[L]${service.clientName}\n" +

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.lavstaritaoperacao.domain.model.Service
+import br.lavstaritaoperacao.domain.model.StatusService
 import br.lavstaritaoperacao.domain.usecase.GlobalUseCase
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -22,10 +23,21 @@ class OperationViewModel(
     val onSuccess: LiveData<List<Service>> get() = _onSuccess
     private val _onSuccess: MutableLiveData<List<Service>> = MutableLiveData()
 
-    fun getServices(){
+    fun getAllServicesBy(status: StatusService){
         viewModelScope.launch {
             _onLoading.value = true
-            _onSuccess.value = globalUseCase.getALLServices()
+            when(status){
+                StatusService.DONE -> _onSuccess.value = globalUseCase.getALLServices().filter { it.statusService == StatusService.DONE }
+
+                StatusService.EM_LAVAGEM,
+                StatusService.EM_SECAGEM,
+                StatusService.EM_PASSAGEM   ->  _onSuccess.value = globalUseCase.getALLServices().filter {
+                    it.statusService != StatusService.DONE && it.statusService != StatusService.OTHER
+                }
+
+                StatusService.OTHER ->  _onSuccess.value =  globalUseCase.getALLServices()
+
+            }
             delay(500)
             _onLoading.value = false
         }
@@ -35,28 +47,11 @@ class OperationViewModel(
         viewModelScope.launch {
             _onLoading.value = true
             globalUseCase.deleteService(service = service)
-            delay(500)
+            delay(100)
             _onSuccess.value = globalUseCase.getALLServices()
             delay(500)
             _onLoading.value = false
         }
     }
 
-    fun clearAllDataBase(){
-        viewModelScope.launch {
-            _onLoading.value = true
-            globalUseCase.deleteAllServices()
-            globalUseCase.deleteAllItems()
-            _onSuccess.value = globalUseCase.getALLServices()
-            _onLoading.value = false
-        }
-    }
-
-    private fun refreshScreen(){
-        viewModelScope.launch {
-            _onLoading.value = true
-            _onSuccess.value = globalUseCase.getALLServices()
-            _onLoading.value = false
-        }
-    }
 }

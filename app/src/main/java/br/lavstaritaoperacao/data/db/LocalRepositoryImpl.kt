@@ -6,6 +6,8 @@ import br.lavstaritaoperacao.data.db.entities.ItemEntity
 import br.lavstaritaoperacao.data.db.entities.ServiceEntity
 import br.lavstaritaoperacao.domain.model.Item
 import br.lavstaritaoperacao.domain.model.Service
+import br.lavstaritaoperacao.domain.model.StatusPayment
+import br.lavstaritaoperacao.domain.model.StatusService
 import org.koin.core.component.getScopeId
 
 class LocalRepositoryImpl(
@@ -59,7 +61,8 @@ class LocalRepositoryImpl(
         serviceDao.updateService(
             serviceId = service.serviceId ?: 0,
             qtdItems = service.qtdItems ?: 0,
-            statusService = service.statusService,
+            statusService = service.statusService ?: StatusService.EM_LAVAGEM,
+            statusPayment = service.statusPayment ?: StatusPayment.NOT_PAID,
             obs = service.obs ?: "-",
             price = service.price
             )
@@ -96,7 +99,8 @@ class LocalRepositoryImpl(
             clientName = service.clientName,
             clientPhone = service.clientPhone,
             qtdItems = service.qtdItems,
-            statusService = service.statusService,
+            statusService = service.statusService ?: StatusService.EM_LAVAGEM,
+            statusPayment = service.statusPayment ?: StatusPayment.NOT_PAID,
             obs = service.obs ?: "-",
             dataIn = service.dataIn,
             price = service.price
@@ -120,5 +124,15 @@ class LocalRepositoryImpl(
             )
         }
         return serviceList
+    }
+
+    private fun convertToStatusService(statusService: String): StatusService{
+        return when(statusService){
+            "Concluído" -> StatusService.DONE
+            "Em Lavagem" -> StatusService.EM_LAVAGEM
+            "Em Secagem" -> StatusService.EM_SECAGEM
+            "Em Passagem" -> StatusService.EM_PASSAGEM
+            else -> StatusService.OTHER
+        }
     }
 }

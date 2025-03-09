@@ -2,13 +2,14 @@ package br.lavstaritaoperacao.ui.operation.home_operation
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import br.lavstaritaoperacao.databinding.ActivityOperationBinding
+import br.lavstaritaoperacao.domain.model.ButtonStatus
 import br.lavstaritaoperacao.domain.model.Service
+import br.lavstaritaoperacao.domain.model.StatusService
 import br.lavstaritaoperacao.ui.operation.add_service.AddServiceActivity
 import br.lavstaritaoperacao.ui.operation.configuration.ConfigurationActivity
 import br.lavstaritaoperacao.ui.operation.edit_service.EditServiceActivity
@@ -31,13 +32,13 @@ class OperationActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.getServices()
+        viewModel.getAllServicesBy(status = StatusService.OTHER)
     }
 
     private fun setupView(){
         binding.rvServices.setHasFixedSize(true)
         binding.rvServices.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-        viewModel.getServices()
+        viewModel.getAllServicesBy(status = StatusService.OTHER)
     }
 
     private fun setupListeners(){
@@ -46,16 +47,27 @@ class OperationActivity : AppCompatActivity() {
             startActivity(intent)
         }
         binding.btnRefresh.setOnClickListener {
-            viewModel.getServices()
+            //TODO - Remove this button on final version
         }
         binding.btnSearch.setOnClickListener {
-
+            //TODO - Implement Search Function
         }
         binding.btnConfig.setOnClickListener {
             val intent = Intent(this, ConfigurationActivity::class.java)
             startActivity(intent)
         }
-
+        binding.btnFinalizado.setOnClickListener{
+            viewModel.getAllServicesBy(status = StatusService.DONE)
+            updateColor(btnStatus = ButtonStatus.COMPLETED)
+        }
+        binding.btnPendente.setOnClickListener{
+            viewModel.getAllServicesBy(status = StatusService.EM_LAVAGEM)
+            updateColor(btnStatus = ButtonStatus.PENDING)
+        }
+        binding.btnTodos.setOnClickListener{
+            viewModel.getAllServicesBy(status = StatusService.OTHER)
+            updateColor(btnStatus = ButtonStatus.ALL)
+        }
     }
 
     private fun setupObservers(){
@@ -73,7 +85,7 @@ class OperationActivity : AppCompatActivity() {
     }
 
     private fun setupServicesRV(services: List<Service>){
-        servicesAdapter = ServicesAdapter(data = services, singleClick, onLongClick)
+        servicesAdapter = ServicesAdapter(context = this, data = services, itemListener = singleClick, itemLongListener = onLongClick)
         binding.rvServices.adapter = servicesAdapter
     }
 
@@ -85,5 +97,13 @@ class OperationActivity : AppCompatActivity() {
 
     private val onLongClick = { service: Service ->
         viewModel.deleteService(service = service)
+    }
+
+    private fun updateColor(btnStatus: ButtonStatus){
+//        when(btnStatus){
+//            ButtonStatus.ALL -> binding.btnTodos.setBackgroundDrawable()
+//            ButtonStatus.PENDING -> binding.btnTodos.setBackgroundDrawable()
+//            ButtonStatus.COMPLETED -> binding.btnTodos.setBackgroundDrawable()
+//        }
     }
 }

@@ -36,4 +36,16 @@ class ConfigurationViewModel(
             _itemsAdded.value = globalUseCase.getAllItems()
         }
     }
+
+    fun deleteAll(){
+        viewModelScope.launch {
+            _onLoading.value = true
+            globalUseCase.deleteAllServices()
+            globalUseCase.deleteAllItems()
+
+            getAllServices()
+            getAllItems()
+            _onLoading.value = false
+        }
+    }
 }

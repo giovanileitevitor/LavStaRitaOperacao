@@ -175,21 +175,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:height="1.0dp"
-                android:text="Lavagem" />
+                android:text="Lavar" />
 
             <RadioButton
                 android:id="@+id/secagemRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:height="1.0dp"
-                android:text="Secagem" />
+                android:text="Secar" />
 
             <RadioButton
                 android:id="@+id/passagemRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:height="1.0dp"
-                android:text="Passagem" />
+                android:text="Passar" />
+
+            <RadioButton
+                android:id="@+id/concluidoRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:height="1.0dp"
+                android:text="CONCLUÍDO" />
 
         </RadioGroup>
 
@@ -200,7 +207,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/size_20"
-        android:layout_marginTop="@dimen/size_10"
+        android:layout_marginTop="@dimen/size_8"
         android:text="@string/label_client_observation"
         android:textColor="@color/blue_lav"
         android:textSize="14sp"
@@ -255,9 +262,9 @@
         android:id="@+id/txtPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/size_20"
         android:layout_marginTop="@dimen/size_12"
-        android:textColor="@color/blue_lav"
+        android:layout_marginEnd="@dimen/size_20"
+        android:textColor="@color/red_nirvana"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edtObs"

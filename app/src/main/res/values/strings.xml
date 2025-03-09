@@ -12,6 +12,9 @@
     <string name="txt_editar_service">Editar Serviço</string>
     <string name="txt_painel_configurar">Configurações</string>
     <string name="label_services">Serviços: </string>
+    <string name="btn_finalizado"><u>+ Finalizado </u></string>
+    <string name="btn_pendente"><u>+ Pendente </u></string>
+    <string name="btn_todos"><u>+ Todos </u></string>
     <string name="label_price">Orçamento em R$: </string>
     <string name="label_services_qtd">Serviços: %S </string>
     <string name="label_client_name">Nome do cliente: </string>

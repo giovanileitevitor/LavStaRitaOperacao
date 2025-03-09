@@ -2,6 +2,8 @@ package br.lavstaritaoperacao.ui.operation.add_service
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -17,10 +19,10 @@ import br.lavstaritaoperacao.databinding.ActivityAddServiceBinding
 import br.lavstaritaoperacao.databinding.DialogAddItemBinding
 import br.lavstaritaoperacao.domain.model.Item
 import br.lavstaritaoperacao.domain.model.Service
+import br.lavstaritaoperacao.domain.model.StatusPayment
+import br.lavstaritaoperacao.domain.model.StatusService
 import br.lavstaritaoperacao.domain.model.gerarNomeDeRoupaAleatorio
-import com.santalu.maskara.Mask
-import com.santalu.maskara.MaskChangedListener
-import com.santalu.maskara.MaskStyle
+import br.lavstaritaoperacao.domain.model.roupas
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.random.Random
 
@@ -35,6 +37,7 @@ class AddServiceActivity: AppCompatActivity() {
     private lateinit var clientPrice: String
     private var items: List<Item> = emptyList()
     private var serviceId: Int? = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,7 +64,8 @@ class AddServiceActivity: AppCompatActivity() {
         }
 
         binding.btnCancelar.setOnClickListener {
-            super.onBackPressed()
+            //super.onBackPressed()
+            dialogAddStep()
         }
 
         binding.btnIncluirItem.setOnClickListener{
@@ -72,7 +76,7 @@ class AddServiceActivity: AppCompatActivity() {
                     serviceId = serviceId,
                     obs = " - "
             ))
-            //dialogAddStep()
+
         }
 
         binding.btnCreateService.setOnClickListener {
@@ -88,7 +92,8 @@ class AddServiceActivity: AppCompatActivity() {
                     clientPhone = clientPhone,
                     qtdItems = items.size ?: 0,
                     dataIn = getDateAndTime(),
-                    statusService = "Lavagem",
+                    statusService = StatusService.EM_LAVAGEM,
+                    statusPayment = StatusPayment.NOT_PAID,
                     obs = clientObs,
                     price = clientPrice
                 )
@@ -145,10 +150,20 @@ class AddServiceActivity: AppCompatActivity() {
     private fun dialogAddStep(){
         val customDialog = AlertDialog.Builder(this).create()
         val bind : DialogAddItemBinding = DialogAddItemBinding.inflate(LayoutInflater.from(this))
+        val containerButtons = findViewById<LinearLayout>(R.id.containerItems)
         customDialog.apply {
             setView(bind.root)
             setCancelable(true)
         }.show()
+
+        roupas().forEach { roupa ->
+            val botao = Button(this)
+            botao.text = roupa
+            botao.setOnClickListener {
+                it.isEnabled = false
+            }
+            bind.containerItems.addView(botao)
+        }
 
         bind.btnAddStep.setOnClickListener {
             val stepText = bind.edtDetail.editableText.toString()

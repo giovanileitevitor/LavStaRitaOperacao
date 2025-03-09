@@ -46,6 +46,9 @@ class ConfigurationActivity: AppCompatActivity() {
         binding.btnVoltar.setOnClickListener {
             super.onBackPressed()
         }
+        binding.btnDeleteAll.setOnClickListener {
+            viewModel.deleteAll()
+        }
     }
 
     private fun setupObservers(){
@@ -60,7 +63,7 @@ class ConfigurationActivity: AppCompatActivity() {
 
     private fun setupServicesRV(services: List<Service>){
         binding.labelServices.text = getString(R.string.label_services_qtd, services.size.toString() ?: "0")
-        servicesAdapterConfig = ServicesAdapter(data = services, singleClick1, onLongClick1)
+        servicesAdapterConfig = ServicesAdapter(context = this, data = services, singleClick1, onLongClick1)
         binding.rvServices.adapter = servicesAdapterConfig
     }
 
