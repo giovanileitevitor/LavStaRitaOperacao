@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.serialization)
     id "org.jetbrains.kotlin.kapt"
+    //id("com.google.gms.google-services")
 }
 
 android {
@@ -57,6 +58,7 @@ dependencies {
     // Retrofit
     implementation libs.retrofit
     implementation libs.converter.gson
+    implementation(libs.converter.moshi)
 
     //DataStore
     implementation libs.androidx.datastore.preferences
@@ -70,5 +72,19 @@ dependencies {
     //Bluetooth Printer Driver
     implementation(libs.escpos.thermalprinter.android)
     implementation(libs.accompanist.permissions)
+
+    //Excel file
+    implementation(libs.poi)
+    implementation(libs.poi.ooxml)
+
+    //Firebase
+    implementation(libs.firebase.database.ktx)
+//    implementation(libs.firebase.bom)
+//    implementation(libs.firebase.analytics)
+
+    //Moshi converter
+    implementation(libs.moshi.kotlin)
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
 
 }

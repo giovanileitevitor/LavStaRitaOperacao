@@ -42,7 +42,7 @@ class EditServiceActivity: AppCompatActivity() {
         binding.rvItems.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
 
         service = intent.getSerializableExtra("service") as Service ?: emptyService()
-        serviceStatus = service.statusService ?: StatusService.EM_PASSAGEM
+        serviceStatus = service.statusService ?: StatusService.EM_LAVAGEM
 
         service.let {
             binding.txtClient.text = it.clientName
@@ -51,7 +51,7 @@ class EditServiceActivity: AppCompatActivity() {
             binding.edtObsDetail.setText(it.obs.toString())
             binding.txtPrice.text = "Orçamento " + it.price
             binding.txtPrice.setTextColor(this.getColor(R.color.red_nirvana))
-            setStatus(serviceStatus = it.statusService ?: StatusService.EM_PASSAGEM)
+            setStatus(serviceStatus = it.statusService ?: StatusService.EM_LAVAGEM)
         }
 
     }
@@ -101,14 +101,11 @@ class EditServiceActivity: AppCompatActivity() {
             val service = radioButton.text.toString()
 
             serviceStatus = when(service){
-                "Lavar" -> StatusService.EM_LAVAGEM
-                "Secar" -> StatusService.EM_SECAGEM
-                "Passar" -> StatusService.EM_PASSAGEM
-                "Concluído" -> StatusService.DONE
-                else -> StatusService.EM_PASSAGEM
+                "Em Lavagem" -> StatusService.EM_LAVAGEM
+                "Concluído" -> StatusService.CONCLUIDO
+                else -> StatusService.EM_LAVAGEM
             }
         }
-
     }
 
     private fun setupObservers(){
@@ -148,10 +145,8 @@ class EditServiceActivity: AppCompatActivity() {
     private fun setStatus(serviceStatus : StatusService){
         when(serviceStatus){
             StatusService.EM_LAVAGEM -> binding.lavagemRadioButton.isChecked = true
-            StatusService.EM_SECAGEM -> binding.secagemRadioButton.isChecked = true
-            StatusService.EM_PASSAGEM -> binding.passagemRadioButton.isChecked = true
-            StatusService.DONE -> binding.concluidoRadioButton.isChecked = true
-            else -> binding.lavagemRadioButton.isChecked = true
+            StatusService.CONCLUIDO -> binding.concluidoRadioButton.isChecked = true
+            else -> { }
         }
     }
 

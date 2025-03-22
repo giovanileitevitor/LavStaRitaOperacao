@@ -175,28 +175,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:height="1.0dp"
-                android:text="Lavar" />
-
-            <RadioButton
-                android:id="@+id/secagemRadioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:height="1.0dp"
-                android:text="Secar" />
-
-            <RadioButton
-                android:id="@+id/passagemRadioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:height="1.0dp"
-                android:text="Passar" />
+                android:text="@string/status_lavar" />
 
             <RadioButton
                 android:id="@+id/concluidoRadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:height="1.0dp"
-                android:text="CONCLUÍDO" />
+                android:text="@string/status_concluido" />
 
         </RadioGroup>
 

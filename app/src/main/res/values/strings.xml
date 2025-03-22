@@ -29,5 +29,13 @@
     <string name="btn_registrar_service">Registrar Serviço</string>
     <string name="btn_add_service">Adicionar serviço</string>
     <string name="dialog_add_title">Selecione o tipo de item:</string>
+    <string name="btn_increment">+</string>
+    <string name="btn_decrement">-</string>
+    <string name="btn_cancelar_item">Cancelar</string>
+    <string name="btn_adicionar_item">Adicionar Item</string>
+    <string name="hint_itenm_name">item-name</string>
+    <string name="item_qtd_default">1</string>
+    <string name="status_lavar">Em Lavagem</string>
+    <string name="status_concluido">Concluído</string>
 
 </resources>

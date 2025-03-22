@@ -1,6 +1,4 @@
-package br.lavstaritaoperacao.data.remote.retrofit
-
-import retrofit2.Response
+package br.lavstaritaoperacao.data.remote
 
 sealed class Results<T>
 data class SuccessResults<T>(val body: T) : Results<T>()

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "880818854353",
+    "project_id": "lavsantarita-cb596",
+    "storage_bucket": "lavsantarita-cb596.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:880818854353:android:0e14374f1dc6e7594068f0",
+        "android_client_info": {
+          "package_name": "br.lavstaritaoperacao"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGIhqoPVT3upOINDXu_w1wjRxkqa4xVjk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

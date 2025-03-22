@@ -57,7 +57,7 @@ class OperationActivity : AppCompatActivity() {
             startActivity(intent)
         }
         binding.btnFinalizado.setOnClickListener{
-            viewModel.getAllServicesBy(status = StatusService.DONE)
+            viewModel.getAllServicesBy(status = StatusService.CONCLUIDO)
             updateColor(btnStatus = ButtonStatus.COMPLETED)
         }
         binding.btnPendente.setOnClickListener{

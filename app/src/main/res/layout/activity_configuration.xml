@@ -64,6 +64,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/txtAppName" />
 
+    <ImageButton
+        android:id="@+id/btnExportAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/size_32"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/img_description"
+        android:src="@drawable/ic_share"
+        app:layout_constraintBottom_toBottomOf="@id/txtAppName"
+        app:layout_constraintEnd_toStartOf="@id/btnDeleteAll"
+        app:layout_constraintTop_toTopOf="@id/txtAppName" />
+
     <TextView
         android:id="@+id/labelServices"
         android:layout_width="0dp"

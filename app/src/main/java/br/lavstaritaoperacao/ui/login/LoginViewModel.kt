@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import br.lavstaritaoperacao.domain.model.LoginResult
+import br.lavstaritaoperacao.domain.model.UserType
 import br.lavstaritaoperacao.domain.usecase.GlobalUseCase
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -18,22 +20,20 @@ class LoginViewModel(
     val onError: LiveData<Boolean> get() = _onError
     private val _onError: MutableLiveData<Boolean> = MutableLiveData()
 
-    val onSuccess: LiveData<String> get() = _onSuccess
-    private val _onSuccess: MutableLiveData<String> = MutableLiveData()
+    val onSuccess: LiveData<LoginResult> get() = _onSuccess
+    private val _onSuccess: MutableLiveData<LoginResult> = MutableLiveData()
 
     fun checkCpf(cpf: String){
         viewModelScope.launch {
             _onLoading.value = true
-            delay(1000)
-            when(globalUseCase.startLogin(cpf = cpf) ?: false){
-                true -> {
-                    _onSuccess.value = "VALID"
-                }
-                false -> {
-                    _onError.value = true
-                }
-            }
+            delay(500)
+            val loginResult = globalUseCase.startLogin(cpf = cpf)
 
+            if((loginResult.status == false) && (loginResult.codeResponse == 0)){
+                _onError.value = true
+            }else{
+                _onSuccess.value = loginResult
+            }
             _onLoading.value = false
         }
     }

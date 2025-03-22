@@ -69,7 +69,16 @@ class AddServiceViewModel(
     fun deleteItem(item: Item){
         viewModelScope.launch {
             _onLoading.value = true
-            globalUseCase.deleteItem(item = item)
+            globalUseCase.deleteItemByServiceId(serviceId = item.serviceId ?: 0)
+            refreshScreen()
+            _onLoading.value = false
+        }
+    }
+
+    fun cleanNotUsedItems(temporaryServiceId: Int){
+        viewModelScope.launch {
+            _onLoading.value = true
+            globalUseCase.deleteItemByServiceId(serviceId = temporaryServiceId)
             refreshScreen()
             _onLoading.value = false
         }

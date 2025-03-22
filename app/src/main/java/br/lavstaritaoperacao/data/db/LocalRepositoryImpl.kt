@@ -8,7 +8,6 @@ import br.lavstaritaoperacao.domain.model.Item
 import br.lavstaritaoperacao.domain.model.Service
 import br.lavstaritaoperacao.domain.model.StatusPayment
 import br.lavstaritaoperacao.domain.model.StatusService
-import org.koin.core.component.getScopeId
 
 class LocalRepositoryImpl(
     private val itemDao: ItemDao,
@@ -27,6 +26,10 @@ class LocalRepositoryImpl(
         item.id.let {
             itemDao.deleteItem(itemId = it ?: 0)
         }
+    }
+
+    override suspend fun deleteItemByServiceId(serviceId: Int){
+        itemDao.deleteItemByServiceId(serviceId = serviceId)
     }
 
     override suspend fun deleteAllItems() {
@@ -128,11 +131,9 @@ class LocalRepositoryImpl(
 
     private fun convertToStatusService(statusService: String): StatusService{
         return when(statusService){
-            "Concluído" -> StatusService.DONE
+            "Concluído" -> StatusService.CONCLUIDO
             "Em Lavagem" -> StatusService.EM_LAVAGEM
-            "Em Secagem" -> StatusService.EM_SECAGEM
-            "Em Passagem" -> StatusService.EM_PASSAGEM
-            else -> StatusService.OTHER
+            else -> StatusService.EM_LAVAGEM
         }
     }
 }

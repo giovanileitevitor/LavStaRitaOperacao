@@ -27,16 +27,9 @@ class OperationViewModel(
         viewModelScope.launch {
             _onLoading.value = true
             when(status){
-                StatusService.DONE -> _onSuccess.value = globalUseCase.getALLServices().filter { it.statusService == StatusService.DONE }
-
-                StatusService.EM_LAVAGEM,
-                StatusService.EM_SECAGEM,
-                StatusService.EM_PASSAGEM   ->  _onSuccess.value = globalUseCase.getALLServices().filter {
-                    it.statusService != StatusService.DONE && it.statusService != StatusService.OTHER
-                }
-
-                StatusService.OTHER ->  _onSuccess.value =  globalUseCase.getALLServices()
-
+                StatusService.CONCLUIDO -> _onSuccess.value = globalUseCase.getALLServices().filter { it.statusService == StatusService.CONCLUIDO }
+                StatusService.EM_LAVAGEM, ->  _onSuccess.value = globalUseCase.getALLServices().filter { it.statusService != StatusService.CONCLUIDO }
+                else -> _onSuccess.value = globalUseCase.getALLServices()
             }
             delay(500)
             _onLoading.value = false

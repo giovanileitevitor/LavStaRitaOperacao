@@ -1,12 +1,16 @@
 package br.lavstaritaoperacao.ui.operation.add_service
 
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.LayoutInflater
+import android.view.ViewGroup
 import android.widget.Button
+import android.widget.GridLayout
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -64,19 +68,12 @@ class AddServiceActivity: AppCompatActivity() {
         }
 
         binding.btnCancelar.setOnClickListener {
-            //super.onBackPressed()
-            dialogAddStep()
+            viewModel.cleanNotUsedItems(temporaryServiceId = serviceId ?: 0)
+            super.onBackPressed()
         }
 
         binding.btnIncluirItem.setOnClickListener{
-            viewModel.addItem(
-                item = Item(
-                    name = gerarNomeDeRoupaAleatorio(),
-                    qtd = Random.nextInt(1,10),
-                    serviceId = serviceId,
-                    obs = " - "
-            ))
-
+            dialogAddItem()
         }
 
         binding.btnCreateService.setOnClickListener {
@@ -147,10 +144,11 @@ class AddServiceActivity: AppCompatActivity() {
         viewModel.deleteItem(item = item)
     }
 
-    private fun dialogAddStep(){
+    private fun dialogAddItem(){
         val customDialog = AlertDialog.Builder(this).create()
         val bind : DialogAddItemBinding = DialogAddItemBinding.inflate(LayoutInflater.from(this))
-        val containerButtons = findViewById<LinearLayout>(R.id.containerItems)
+        val containerButtons = findViewById<GridLayout>(R.id.containerItems)
+        var qtdItems: Int = 1
         customDialog.apply {
             setView(bind.root)
             setCancelable(true)
@@ -159,26 +157,59 @@ class AddServiceActivity: AppCompatActivity() {
         roupas().forEach { roupa ->
             val botao = Button(this)
             botao.text = roupa
+            botao.textSize = 12f
+            botao.background = AppCompatResources.getDrawable(this, R.drawable.button_style)
+            botao.isEnabled = true
             botao.setOnClickListener {
-                it.isEnabled = false
+                it.isEnabled = true
+                bind.edtDetail.setText(roupa)
+                //bind.qtdItems.text = qtdItems.toString()
             }
+
+            val params = GridLayout.LayoutParams()
+            params.width = 0 // Permite que o GridLayout controle a largura
+            params.height = ViewGroup.LayoutParams.WRAP_CONTENT
+            params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f) // Peso da coluna
+            //params.rowSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f) // Peso da linha
+            val margin = TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                8f,
+                resources.displayMetrics
+            ).toInt()
+            params.setMargins(margin, margin, margin, margin)
+
+            botao.layoutParams = params
             bind.containerItems.addView(botao)
         }
 
-        bind.btnAddStep.setOnClickListener {
-            val stepText = bind.edtDetail.editableText.toString()
-            if(stepText.isNotBlank()){
-                hideKeyboard()
-                //viewModel.addNewStep(stepText = stepText)
-                customDialog.dismiss()
-            }else{
-                hideKeyboard()
-                customDialog.dismiss()
-            }
+        bind.btnAddItem.setOnClickListener {
+            hideKeyboard()
+            viewModel.addItem(item = Item(
+                name = bind.edtDetail.text.toString(),
+                qtd = qtdItems ?: 1,
+                serviceId = serviceId
+            ))
+            customDialog.dismiss()
         }
 
-        bind.btnSkipStep.setOnClickListener {
+        bind.btnSkipItem.setOnClickListener {
             customDialog.dismiss()
+        }
+
+        bind.btnIncrement.setOnClickListener {
+            qtdItems += 1
+            bind.qtdItems.text = qtdItems.toString()
+        }
+
+        bind.btnDecrement.setOnClickListener {
+            if(qtdItems <= 1){
+                //dont do anything
+            } else{
+                qtdItems -= 1
+                bind.qtdItems.text = qtdItems.toString()
+
+            }
+
         }
 
     }

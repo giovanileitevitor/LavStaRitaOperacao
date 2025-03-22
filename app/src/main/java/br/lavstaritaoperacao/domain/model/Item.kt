@@ -40,22 +40,23 @@ fun insertItem(newItem: Item): ArrayList<Item> {
 fun gerarNomeDeRoupaAleatorio(): String {
     val roupas = listOf(
         "Camiseta",
-        "Calça",
+        "Calça Jeans",
+        "Calça Social",
         "Camisa",
         "Cueca",
         "Pijama",
         "Blusa",
-        "Casaco",
+        "Casaco/Terno",
         "Vestido",
         "Saia",
         "Shorts",
-        "Meias",
+        "Meia",
         "Sutiã",
         "Calcinha",
         "Boné",
-        "Chapéu",
         "Luvas",
-        "Cachecol"
+        "Cachecol",
+        "OUTRA"
     )
 
 
@@ -65,22 +66,23 @@ fun gerarNomeDeRoupaAleatorio(): String {
 
 fun roupas() = listOf(
     "Camiseta",
-    "Calça",
+    "Calça Jeans",
+    "Calça Social",
     "Camisa",
     "Cueca",
     "Pijama",
     "Blusa",
-    "Casaco",
+    "Casaco/Terno",
     "Vestido",
     "Saia",
     "Shorts",
-    "Meias",
+    "Meia",
     "Sutiã",
     "Calcinha",
     "Boné",
-    "Chapéu",
     "Luvas",
-    "Cachecol"
+    "Cachecol",
+    "OUTRA"
 )
 
 fun gerarListaDeNomesDeRoupasAleatorios(quantidade: Int): List<String> {

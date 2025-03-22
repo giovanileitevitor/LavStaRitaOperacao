@@ -3,6 +3,9 @@ package br.lavstaritaoperacao.di
 import br.lavstaritaoperacao.data.db.LocalDB
 import br.lavstaritaoperacao.data.db.LocalRepository
 import br.lavstaritaoperacao.data.db.LocalRepositoryImpl
+import br.lavstaritaoperacao.data.remote.RemoteRepository
+import br.lavstaritaoperacao.data.remote.RemoteRepositoryImpl
+import br.lavstaritaoperacao.data.remote.api.SupabaseApi
 import br.lavstaritaoperacao.domain.usecase.GlobalUseCase
 import br.lavstaritaoperacao.domain.usecase.GlobalUseCaseImpl
 import br.lavstaritaoperacao.ui.operation.add_service.AddServiceViewModel
@@ -10,8 +13,15 @@ import br.lavstaritaoperacao.ui.operation.home_operation.OperationViewModel
 import br.lavstaritaoperacao.ui.login.LoginViewModel
 import br.lavstaritaoperacao.ui.operation.configuration.ConfigurationViewModel
 import br.lavstaritaoperacao.ui.operation.edit_service.EditServiceViewModel
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
+
 
 object AppModules {
 
@@ -43,6 +53,7 @@ object AppModules {
             ) }
 
         viewModel { ConfigurationViewModel(
+            context = androidContext(),
             globalUseCase = get()
             ) }
     }
@@ -50,7 +61,8 @@ object AppModules {
     val domainModules = module {
         factory<GlobalUseCase>{
             GlobalUseCaseImpl(
-                localRepository = get()
+                localRepository = get(),
+                remoteRepository = get()
             )
         }
 
@@ -58,6 +70,12 @@ object AppModules {
             LocalRepositoryImpl(
                 itemDao = get(),
                 serviceDao = get()
+            )
+        }
+
+        factory <RemoteRepository>{
+            RemoteRepositoryImpl(
+                supabaseApi = get()
             )
         }
     }
@@ -75,6 +93,34 @@ object AppModules {
         single { get<LocalDB>().itemDao() }
 
         single { get<LocalDB>().serviceDao() }
+
+//        single {
+//            Retrofit.Builder()
+//                .baseUrl("https://jmsdxcvdtcvjebjbbkwt.supabase.co") // Substitua pela URL da sua API Supabase
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build()
+//                .create(SupabaseApi::class.java)
+//        }
+
+        single {
+            val loggingInterceptor = HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BODY
+            }
+
+            OkHttpClient.Builder()
+                .addInterceptor(loggingInterceptor)
+                .build()
+        }
+
+        single {
+            Retrofit.Builder()
+                .baseUrl("https://jmsdxcvdtcvjebjbbkwt.supabase.co") // Substitua pela URL do seu Supabase
+                .client(get())
+                .addConverterFactory(MoshiConverterFactory.create())
+                .build()
+        }
+
+        single { get<Retrofit>().create(SupabaseApi::class.java) }
 
     }
 }

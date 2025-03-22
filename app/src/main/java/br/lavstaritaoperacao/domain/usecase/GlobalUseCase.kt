@@ -1,10 +1,11 @@
 package br.lavstaritaoperacao.domain.usecase
 
 import br.lavstaritaoperacao.domain.model.Item
+import br.lavstaritaoperacao.domain.model.LoginResult
 import br.lavstaritaoperacao.domain.model.Service
 
 interface GlobalUseCase {
-    suspend fun startLogin(cpf: String): Boolean
+    suspend fun startLogin(cpf: String): LoginResult
     suspend fun getNextGroupId(): Int
     suspend fun getALLServices(): List<Service>
     suspend fun addService(service: Service)
@@ -14,7 +15,10 @@ interface GlobalUseCase {
     suspend fun getItemsByServiceId(serviceId: Int): List<Item>
     suspend fun addItem(item: Item)
     suspend fun deleteItem(item: Item)
+    suspend fun deleteItemByServiceId(serviceId: Int)
     suspend fun getAllItems(): List<Item>
     suspend fun updateService(service: Service)
+
+    suspend fun getAllServicesRemote(): List<Service>
 
 }

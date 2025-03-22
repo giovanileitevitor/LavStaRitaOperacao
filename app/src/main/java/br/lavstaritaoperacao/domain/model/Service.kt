@@ -17,10 +17,8 @@ data class Service(
 ) : Serializable
 
 enum class StatusService {
-    DONE,
     EM_LAVAGEM,
-    EM_SECAGEM,
-    EM_PASSAGEM,
+    CONCLUIDO,
     OTHER
 }
 

@@ -33,7 +33,7 @@
         android:id="@+id/txtTitleDialogStep"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_20"
+        android:layout_marginTop="@dimen/size_12"
         android:gravity="center"
         android:text="@string/dialog_add_title"
         android:textColor="@color/black"
@@ -44,24 +44,15 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Selecione o tipo de item:"/>
 
-    <LinearLayout
+    <GridLayout
+        android:id="@+id/containerItems"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:columnCount="3"
         android:minHeight="@dimen/size_100"
-        android:id="@+id/containerItems"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/txtTitleDialogStep"
+        app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
         app:layout_constraintStart_toEndOf="@id/guidelineInit"
-        app:layout_constraintEnd_toStartOf="@id/guidelineEnd"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtOr"
-        android:text="Ou informe o nome do item abaixo"
-        app:layout_constraintTop_toBottomOf="@id/containerItems"
-        app:layout_constraintStart_toStartOf="@id/guidelineInit"
-        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"/>
+        app:layout_constraintTop_toBottomOf="@id/txtTitleDialogStep"/>
 
     <EditText
         android:id="@+id/edtDetail"
@@ -70,42 +61,88 @@
         android:layout_marginTop="20dp"
         android:autofillHints=""
         android:backgroundTint="@color/black"
-        android:digits="qwertyuiopasdfghjklzxcvbnm áãâóõéíçê QWERTYUIOPASDFGHJKLZXCVBNM ()1234567890 @#$%*=+-\/?!-,."
-        android:hint=" - "
+        android:digits="qwertyuiopasdfghjklzxcvbnm áãâóõéíçê QWERTYUIOPASDFGHJKLZXCVBNM -,."
         android:imeOptions="actionDone"
         android:inputType="text|textCapSentences"
         android:maxLength="200"
         android:maxLines="3"
+        android:hint="@string/hint_itenm_name"
+        android:textAlignment="center"
+        android:textAllCaps="true"
         android:textColor="@color/black"
         android:textCursorDrawable="@null"
-        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        android:textSize="@dimen/font_size_14"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
         app:layout_constraintStart_toStartOf="@id/guidelineInit"
         app:layout_constraintTop_toBottomOf="@id/containerItems" />
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/btnSkipStep"
+    <TextView
+        android:id="@+id/qtdItems"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cancelar"
+        android:layout_marginStart="@dimen/size_20"
+        android:gravity="center"
+        android:text="@string/item_qtd_default"
         android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/edtDetail"
+        app:layout_constraintStart_toEndOf="@id/guidelineCenter"
+        app:layout_constraintTop_toTopOf="@id/edtDetail" />
+
+    <Button
+        android:id="@+id/btnIncrement"
+        android:layout_width="@dimen/size_62"
+        android:layout_height="@dimen/size_44"
+        android:layout_marginStart="@dimen/size_20"
+        android:background="@drawable/button_style"
+        android:text="@string/btn_increment"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_size_12"
+        app:layout_constraintBottom_toBottomOf="@id/qtdItems"
+        app:layout_constraintStart_toEndOf="@id/qtdItems"
+        app:layout_constraintTop_toTopOf="@id/qtdItems"/>
+
+    <Button
+        android:id="@+id/btnDecrement"
+        android:layout_width="@dimen/size_62"
+        android:layout_height="@dimen/size_44"
+        android:background="@drawable/button_style"
+        android:text="@string/btn_decrement"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_size_12"
+        app:layout_constraintBottom_toBottomOf="@id/qtdItems"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintTop_toTopOf="@id/qtdItems" />
+
+    <Button
+        android:id="@+id/btnSkipItem"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_32"
+        android:layout_marginEnd="@dimen/size_20"
+        android:background="@drawable/button_style"
+        android:text="@string/btn_cancelar_item"
+        android:textColor="@color/white"
         app:backgroundTint="@color/blue_lav"
-        app:icon="@drawable/ic_add_service"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@id/guidelineInit"
         app:layout_constraintTop_toBottomOf="@+id/edtDetail"
         tools:text="Cancelar" />
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/btnAddStep"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/btnAddItem"
+        android:layout_width="@dimen/size_160"
         android:layout_height="wrap_content"
-        android:text="Adicionar"
-        android:textColor="@color/black"
+        android:layout_marginStart="@dimen/size_20"
+        android:layout_marginTop="@dimen/size_32"
+        android:background="@drawable/button_style"
+        android:text="@string/btn_adicionar_item"
+        android:textColor="@color/white"
         app:backgroundTint="@color/blue_lav"
-        app:icon="@drawable/ic_print"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
         app:layout_constraintTop_toBottomOf="@+id/edtDetail"
-        tools:text="Adicionar" />
+        tools:text="Adicionar Item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

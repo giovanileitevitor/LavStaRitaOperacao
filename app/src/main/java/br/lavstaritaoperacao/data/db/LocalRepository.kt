@@ -7,6 +7,7 @@ interface LocalRepository {
     suspend fun addItem(item: Item)
     suspend fun getItemsByServiceId(serviceId: Int): List<Item>
     suspend fun deleteItem(item: Item)
+    suspend fun deleteItemByServiceId(serviceId: Int)
     suspend fun deleteAllItems()
     suspend fun getAllItems(): List<Item>
     suspend fun addService(service: Service)

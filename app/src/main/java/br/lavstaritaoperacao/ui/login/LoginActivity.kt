@@ -12,6 +12,8 @@ import br.lavstaritaoperacao.aux.PermissionUtils
 import br.lavstaritaoperacao.aux.hideKeyboard
 import br.lavstaritaoperacao.aux.onDebouncedListener
 import br.lavstaritaoperacao.databinding.ActivityLoginBinding
+import br.lavstaritaoperacao.domain.model.UserType
+import br.lavstaritaoperacao.ui.client.home_client.ClientHomeActivity
 import br.lavstaritaoperacao.ui.operation.home_operation.OperationActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -49,11 +51,15 @@ class LoginActivity : AppCompatActivity() {
 
         viewModel.onError.observe(this){
             if(it){
-                Toast.makeText(this, "Erro de requisição !!!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Erro de requisição ou CPF inválido!!!", Toast.LENGTH_SHORT).show()
             }
         }
         viewModel.onSuccess.observe(this){
-            if(it.equals("VALID")){
+            if(it.userType == UserType.CLIENT){
+                val intent = Intent(this, ClientHomeActivity::class.java)
+                startActivity(intent)
+            }
+            if(it.userType == UserType.ADMIN){
                 val intent = Intent(this, OperationActivity::class.java)
                 startActivity(intent)
             }

@@ -24,6 +24,9 @@ interface ItemDao{
     @Query("DELETE FROM itemTB WHERE itemId = :itemId")
     suspend fun deleteItem(itemId: Int)
 
+    @Query("DELETE FROM itemTB WHERE serviceId = :serviceId")
+    suspend fun deleteItemByServiceId(serviceId: Int)
+
     @Query("UPDATE itemTB SET name = :name, qtd = :qtd WHERE itemId = :itemId")
     suspend fun updateItems(itemId : Int, name: String, qtd: Int)
 

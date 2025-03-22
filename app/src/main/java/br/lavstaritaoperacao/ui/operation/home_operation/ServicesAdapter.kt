@@ -42,7 +42,7 @@ class ServicesAdapter (
         holder.price.text = "Preço: " + item.price.toString()
         holder.containerItem.bringToFront()
         item.statusService.let {
-            if(it == StatusService.DONE || it == StatusService.OTHER){
+            if(it == StatusService.CONCLUIDO || it == StatusService.OTHER){
                 holder.statusContainer.setBackgroundDrawable(getDrawable(context, R.drawable.status_corner_complete))
             }else{
                 holder.statusContainer.setBackgroundDrawable(getDrawable(context, R.drawable.status_corner_pending))

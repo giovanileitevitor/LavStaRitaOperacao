@@ -1,18 +1,26 @@
 package br.lavstaritaoperacao.domain.usecase
 
 import br.lavstaritaoperacao.data.db.LocalRepository
+import br.lavstaritaoperacao.data.remote.RemoteRepository
 import br.lavstaritaoperacao.domain.model.Item
+import br.lavstaritaoperacao.domain.model.LoginResult
 import br.lavstaritaoperacao.domain.model.Service
+import br.lavstaritaoperacao.domain.model.UserType
 import kotlin.random.Random
 
 class GlobalUseCaseImpl(
-    private val localRepository: LocalRepository
+    private val localRepository: LocalRepository,
+    private val remoteRepository: RemoteRepository
 ): GlobalUseCase {
-    override suspend fun startLogin(cpf: String): Boolean {
-        if(cpf.isEmpty()){
-            return false
-        } else{
-            return Random.nextBoolean()
+    override suspend fun startLogin(cpf: String): LoginResult {
+        return if(cpf.isEmpty()){
+            LoginResult(status = false, codeResponse = 0, userType = UserType.ADMIN)
+        } else if(cpf == "555.555.555-55"){
+            LoginResult(status = true, codeResponse = 1, userType = UserType.ADMIN)
+        } else if(cpf == "111.111.111-11"){
+            LoginResult(status = true, codeResponse = 1, userType = UserType.CLIENT)
+        } else {
+            LoginResult(status = false, codeResponse = 0, userType = UserType.ADMIN)
         }
     }
 
@@ -48,6 +56,10 @@ class GlobalUseCaseImpl(
         localRepository.deleteItem(item = item)
     }
 
+    override suspend fun deleteItemByServiceId(serviceId: Int) {
+        localRepository.deleteItemByServiceId(serviceId = serviceId)
+    }
+
     override suspend fun deleteAllItems() {
         localRepository.deleteAllItems()
     }
@@ -58,5 +70,9 @@ class GlobalUseCaseImpl(
 
     override suspend fun updateService(service: Service) {
         localRepository.updateService(service = service)
+    }
+
+    override suspend fun getAllServicesRemote(): List<Service> {
+        return remoteRepository.getAllServicesRemote()
     }
 }

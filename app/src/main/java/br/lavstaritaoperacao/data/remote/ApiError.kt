@@ -1,4 +1,4 @@
-package br.lavstaritaoperacao.data.remote.retrofit
+package br.lavstaritaoperacao.data.remote
 
 data class ApiError(
     val errorCode: String? = null,
