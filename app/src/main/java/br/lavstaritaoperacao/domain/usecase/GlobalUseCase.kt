@@ -2,7 +2,6 @@ package br.lavstaritaoperacao.domain.usecase
 
 import br.lavstaritaoperacao.domain.model.Item
 import br.lavstaritaoperacao.domain.model.LoginResult
-import br.lavstaritaoperacao.domain.model.Pessoa
 import br.lavstaritaoperacao.domain.model.Service
 import br.lavstaritaoperacao.domain.model.Service2
 
@@ -22,7 +21,5 @@ interface GlobalUseCase {
     suspend fun updateService(service: Service)
 
     suspend fun getAllServicesRemote(): List<Service2>
-    suspend fun salvarPessoaUseCase(pessoa: Pessoa)
-    suspend fun obterPessoasUseCase(): List<Pessoa>
 
 }

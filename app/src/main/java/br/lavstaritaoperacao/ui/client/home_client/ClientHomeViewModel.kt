@@ -4,17 +4,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.lavstaritaoperacao.domain.model.Pessoa
 import br.lavstaritaoperacao.domain.model.Service2
-import br.lavstaritaoperacao.domain.usecase.GetServiceUseCase
-import br.lavstaritaoperacao.domain.usecase.InsertServiceUseCase
+import br.lavstaritaoperacao.domain.usecase.ServiceUseCase
 import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 
 class ClientHomeViewModel(
-    private val getServiceUseCase: GetServiceUseCase,
-    private val insertServiceUseCase: InsertServiceUseCase
+//    private val getServiceUseCase: GetServiceUseCase,
+//    private val insertServiceUseCase: InsertServiceUseCase
+    private val serviceUseCase: ServiceUseCase
 ) : ViewModel() {
 
 //    val onResult: LiveData<List<Pessoa>> get() = _onResult
@@ -26,7 +25,7 @@ class ClientHomeViewModel(
 
     fun obterPessoas() {
         viewModelScope.launch {
-            getServiceUseCase().fold(
+            serviceUseCase.getServices().fold(
                 onSuccess = { notes ->
                     _notes.value = notes
                 },
@@ -41,14 +40,12 @@ class ClientHomeViewModel(
         val randomService = Service2(
             id = Random.nextInt(),
             clientName = "Teste Teste Teste",
-            created_at = "2025-03-22 15:39:00.330782+00",
             qtdItems = Random.nextInt(),
             clientPhone = "(11)777777777"
         )
         viewModelScope.launch {
-            insertServiceUseCase(randomService).fold(
+            serviceUseCase.insertService(randomService).fold(
                 onSuccess = { insertedNote ->
-
                     println("Nota inserida com sucesso: ${insertedNote.clientName}")
                 },
                 onFailure = { error ->

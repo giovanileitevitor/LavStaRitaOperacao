@@ -34,7 +34,10 @@ class ClientHomeActivity: AppCompatActivity() {
     }
 
     private fun setupObservers(){
-
+        viewModel.notes.observe(this) {
+            binding.qtdItems.text = "Total: ${it.size}"
+            binding.txtResult.text = it.toString()
+        }
     }
 
 

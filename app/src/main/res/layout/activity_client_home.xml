@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/red_nirvana">
 
     <Button
@@ -10,9 +11,8 @@
         android:layout_height="wrap_content"
         android:text="btnInsertData"
         android:id="@+id/btnInsertData"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="@dimen/size_20"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <Button
@@ -20,8 +20,28 @@
         android:layout_height="wrap_content"
         android:text="btnGetList"
         android:id="@+id/btnGetList"
+        android:layout_margin="@dimen/size_20"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/qtdItems"
+        tools:text="QTD Items"
+        android:layout_margin="@dimen/size_20"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnGetList"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/match_constraint"
+        android:id="@+id/txtResult"
+        android:textColor="@color/black"
+        android:layout_margin="@dimen/size_20"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/qtdItems"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

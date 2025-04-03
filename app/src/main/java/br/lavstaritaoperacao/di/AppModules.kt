@@ -3,12 +3,11 @@ package br.lavstaritaoperacao.di
 import br.lavstaritaoperacao.data.db.LocalDB
 import br.lavstaritaoperacao.data.db.LocalRepository
 import br.lavstaritaoperacao.data.db.LocalRepositoryImpl
-import br.lavstaritaoperacao.data.supabase.NotesRepository
-import br.lavstaritaoperacao.data.supabase.NotesRepositoryImpl
-import br.lavstaritaoperacao.domain.usecase.GetServiceUseCase
+import br.lavstaritaoperacao.data.supabase.ServiceRepository
+import br.lavstaritaoperacao.data.supabase.ServiceRepositoryImpl
 import br.lavstaritaoperacao.domain.usecase.GlobalUseCase
 import br.lavstaritaoperacao.domain.usecase.GlobalUseCaseImpl
-import br.lavstaritaoperacao.domain.usecase.InsertServiceUseCase
+import br.lavstaritaoperacao.domain.usecase.ServiceUseCase
 import br.lavstaritaoperacao.ui.client.home_client.ClientHomeViewModel
 import br.lavstaritaoperacao.ui.login.LoginViewModel
 import br.lavstaritaoperacao.ui.operation.add_service.AddServiceViewModel
@@ -29,8 +28,7 @@ object AppModules {
 
     val presentationModules = module {
         viewModel { ClientHomeViewModel(
-            getServiceUseCase = get(),
-            insertServiceUseCase = get()
+            serviceUseCase = get(),
         ) }
 
         viewModel { LoginViewModel(
@@ -62,8 +60,7 @@ object AppModules {
             )
         }
 
-        single { GetServiceUseCase(get()) }
-        single { InsertServiceUseCase(get()) }
+        single { ServiceUseCase(get()) }
 
     }
 
@@ -83,7 +80,7 @@ object AppModules {
             }
         }
 
-        single<NotesRepository> { NotesRepositoryImpl(get()) }
+        single<ServiceRepository> { ServiceRepositoryImpl(get()) }
 
         factory <LocalRepository>{
             LocalRepositoryImpl(

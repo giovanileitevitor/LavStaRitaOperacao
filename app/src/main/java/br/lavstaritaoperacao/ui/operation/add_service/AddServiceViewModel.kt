@@ -11,7 +11,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class AddServiceViewModel(
-    private val globalUseCase: GlobalUseCase
+    private val globalUseCase: GlobalUseCase,
+    //private val insertServiceUseCase: InsertServiceUseCase
 ): ViewModel() {
 
     val onLoading: LiveData<Boolean> get() = _onLoading

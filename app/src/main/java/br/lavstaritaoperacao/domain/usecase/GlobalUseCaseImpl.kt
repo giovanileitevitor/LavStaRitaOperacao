@@ -3,7 +3,6 @@ package br.lavstaritaoperacao.domain.usecase
 import br.lavstaritaoperacao.data.db.LocalRepository
 import br.lavstaritaoperacao.domain.model.Item
 import br.lavstaritaoperacao.domain.model.LoginResult
-import br.lavstaritaoperacao.domain.model.Pessoa
 import br.lavstaritaoperacao.domain.model.Service
 import br.lavstaritaoperacao.domain.model.Service2
 import br.lavstaritaoperacao.domain.model.UserType
@@ -76,12 +75,5 @@ class GlobalUseCaseImpl(
         return emptyList<Service2>()
     }
 
-    override suspend fun salvarPessoaUseCase(pessoa: Pessoa) {
-        //firestoreRepository.salvarPessoa(pessoa = pessoa)
-    }
 
-    override suspend fun obterPessoasUseCase(): List<Pessoa> {
-        //return firestoreRepository.obterPessoas()
-        return emptyList()
-    }
 }
