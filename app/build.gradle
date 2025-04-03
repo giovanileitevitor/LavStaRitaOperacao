@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.serialization)
     id "org.jetbrains.kotlin.kapt"
-    //id("com.google.gms.google-services")
+    //kotlin ("plugin.serialization") version "KOTLIN_VERSION"
 }
 
 android {
@@ -78,13 +78,19 @@ dependencies {
     implementation(libs.poi.ooxml)
 
     //Firebase
-    implementation(libs.firebase.database.ktx)
-//    implementation(libs.firebase.bom)
-//    implementation(libs.firebase.analytics)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.database)
+    //implementation libs.firebase.core
+    //implementation(libs.firebase.analytics)
 
     //Moshi converter
     implementation(libs.moshi.kotlin)
     implementation(libs.okhttp)
     implementation(libs.logging.interceptor)
+
+    //SupaBASE
+    implementation(platform(libs.bom))
+    implementation("io.github.jan-tennert.supabase:postgrest-kt")
+    implementation("io.ktor:ktor-client-android:2.3.7")
 
 }

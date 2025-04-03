@@ -1,10 +1,12 @@
 [versions]
 accompanistPermissions = "0.37.0"
 agp = "8.8.0"
+bom = "2.0.0-rc-1"
 datastorePreferences = "1.1.2"
 escposThermalprinterAndroid = "3.4.0"
-firebaseBom = "33.11.0"
-firebaseDatabaseKtx = "21.0.0"
+firebaseBom = "33.12.0"
+firebaseCore = "21.1.1"
+firebaseDatabaseKtx = "20.3.0"
 koinAndroid = "3.4.0"
 kotlin = "1.9.24"
 coreKtx = "1.15.0"
@@ -13,6 +15,7 @@ junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 appcompat = "1.7.0"
 kotlinxSerializationJson = "1.5.1"
+ktorClientAndroid = "2.3.7"
 loggingInterceptor = "4.11.0"
 maskara = "1.0.0"
 material = "1.12.0"
@@ -32,12 +35,15 @@ androidx-datastore-preferences = { module = "androidx.datastore:datastore-prefer
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomRuntime" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomRuntime" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
+bom = { module = "io.github.jan-tennert.supabase:bom", version.ref = "bom" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
 converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
 escpos-thermalprinter-android = { module = "com.github.DantSu:ESCPOS-ThermalPrinter-Android", version.ref = "escposThermalprinterAndroid" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
-firebase-database-ktx = { module = "com.google.firebase:firebase-database-ktx", version.ref = "firebaseDatabaseKtx" }
+firebase-core = { module = "com.google.firebase:firebase-core", version.ref = "firebaseCore" }
+
+firebase-database = { module = "com.google.firebase:firebase-database" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }

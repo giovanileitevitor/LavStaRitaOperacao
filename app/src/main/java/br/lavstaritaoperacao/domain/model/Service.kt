@@ -16,6 +16,7 @@ data class Service(
     var price: String
 ) : Serializable
 
+
 enum class StatusService {
     EM_LAVAGEM,
     CONCLUIDO,

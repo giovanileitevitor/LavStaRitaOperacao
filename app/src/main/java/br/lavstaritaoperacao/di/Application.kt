@@ -22,7 +22,6 @@ class Application(): Application() {
             androidContext(this@Application)
             androidFileProperties()
             koin.loadModules(getAllModules())
-
         }
     }
 

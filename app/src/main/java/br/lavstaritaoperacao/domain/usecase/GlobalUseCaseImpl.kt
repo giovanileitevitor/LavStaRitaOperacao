@@ -1,17 +1,17 @@
 package br.lavstaritaoperacao.domain.usecase
 
 import br.lavstaritaoperacao.data.db.LocalRepository
-import br.lavstaritaoperacao.data.remote.RemoteRepository
 import br.lavstaritaoperacao.domain.model.Item
 import br.lavstaritaoperacao.domain.model.LoginResult
+import br.lavstaritaoperacao.domain.model.Pessoa
 import br.lavstaritaoperacao.domain.model.Service
+import br.lavstaritaoperacao.domain.model.Service2
 import br.lavstaritaoperacao.domain.model.UserType
-import kotlin.random.Random
 
 class GlobalUseCaseImpl(
-    private val localRepository: LocalRepository,
-    private val remoteRepository: RemoteRepository
+    private val localRepository: LocalRepository
 ): GlobalUseCase {
+    
     override suspend fun startLogin(cpf: String): LoginResult {
         return if(cpf.isEmpty()){
             LoginResult(status = false, codeResponse = 0, userType = UserType.ADMIN)
@@ -72,7 +72,16 @@ class GlobalUseCaseImpl(
         localRepository.updateService(service = service)
     }
 
-    override suspend fun getAllServicesRemote(): List<Service> {
-        return remoteRepository.getAllServicesRemote()
+    override suspend fun getAllServicesRemote(): List<Service2> {
+        return emptyList<Service2>()
+    }
+
+    override suspend fun salvarPessoaUseCase(pessoa: Pessoa) {
+        //firestoreRepository.salvarPessoa(pessoa = pessoa)
+    }
+
+    override suspend fun obterPessoasUseCase(): List<Pessoa> {
+        //return firestoreRepository.obterPessoas()
+        return emptyList()
     }
 }
